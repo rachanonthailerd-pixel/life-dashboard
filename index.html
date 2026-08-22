@@ -192,6 +192,7 @@
 
   #signInGate { max-width: 420px; margin: 60px auto; text-align: center; padding: 24px; }
   #signInGate p { color: var(--muted); font-size: var(--fs-body); font-weight: 500; }
+  #signInStatus { color: var(--danger); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -209,6 +210,7 @@
 
 <div id="signInGate">
   <p>เข้าสู่ระบบด้วยบัญชี Google ที่ตั้งใจใช้กับระบบนี้เพื่อเริ่มใช้งาน ข้อมูลทั้งหมดจะถูกเก็บใน Google ปฏิทิน / ชีตของบัญชีนั้นเท่านั้น</p>
+  <p id="signInStatus" hidden></p>
 </div>
 
 <main id="app" hidden>
@@ -361,6 +363,25 @@ function setStatus(msg, isError) {
   const el = document.getElementById('statusMsg');
   el.textContent = msg || '';
   el.className = isError ? 'error' : '';
+}
+
+function setSignInStatus(msg) {
+  const el = document.getElementById('signInStatus');
+  el.textContent = msg || '';
+  el.hidden = !msg;
+}
+
+function describeErrorReason(err) {
+  if (err && err.message === 'unauthorized') return null;
+  const m = /^(\d{3}):/.exec((err && err.message) || '');
+  if (m) {
+    const code = m[1];
+    if (code === '429') return 'ใช้งาน Google มากเกินไปในช่วงนี้';
+    if (code === '403') return 'ไม่มีสิทธิ์เข้าถึงข้อมูลนี้';
+    if (code[0] === '5') return 'เซิร์ฟเวอร์ของ Google มีปัญหาชั่วคราว';
+    return 'เกิดข้อผิดพลาดจาก Google';
+  }
+  return 'เชื่อมต่ออินเทอร์เน็ตไม่ได้';
 }
 
 async function findOrCreateSpreadsheet() {
@@ -707,6 +728,8 @@ function showApp() {
 }
 
 async function onSignedIn() {
+  const wasAlreadyShown = !document.getElementById('app').hidden;
+  if (!wasAlreadyShown) setSignInStatus('');
   try {
     setStatus('กำลังเตรียมข้อมูล...');
     await findOrCreateSpreadsheet();
@@ -718,7 +741,13 @@ async function onSignedIn() {
     render();
   } catch (e) {
     console.error(e);
-    setStatus('เกิดข้อผิดพลาด: ' + e.message, true);
+    const reason = describeErrorReason(e);
+    if (!reason) return;
+    if (wasAlreadyShown) {
+      setStatus(reason + ' กรุณาลองใหม่อีกครั้ง', true);
+    } else {
+      setSignInStatus(reason + ' กรุณาตรวจสอบแล้วกด "เข้าสู่ระบบด้วย Google" อีกครั้ง');
+    }
   }
 }
 
@@ -779,7 +808,8 @@ document.addEventListener('DOMContentLoaded', () => {
       render();
     } catch (err) {
       console.error(err);
-      setStatus('บันทึกไม่สำเร็จ: ' + err.message, true);
+      const reason = describeErrorReason(err);
+      if (reason) setStatus(reason + ' บันทึกไม่สำเร็จ — ข้อมูลที่กรอกไว้ยังอยู่ กด "บันทึก" อีกครั้งได้เลย', true);
     } finally {
       setButtonLoading(submitBtn, false);
       cancelBtn.disabled = false;
