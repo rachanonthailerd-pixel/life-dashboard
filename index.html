@@ -5,85 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Life Dashboard</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" defer></script>
 <style>
   :root {
-    --bg: #f5f6f8;
-    --surface: #ffffff;
-    --text: #1c1e21;
-    --muted: #6b7280;
-    --border: #e2e4e8;
-    --accent: #4285F4;
-    --work: #4285F4;
-    --personal: #34A853;
-    --danger: #ea4335;
-    --radius: 10px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fdf5e6;
+    --surface: #fffdf8;
+    --surface-alt: #fff1d6;
+    --text: #2d2a3a;
+    --muted: #8a8398;
+    --ink: #2d2a3a;
+    --work: #3a86ff;
+    --personal: #ef5da8;
+    --danger: #ef476f;
+    --success: #2ec4b6;
+    --primary: #ffc23c;
+    --shadow-c: rgba(45, 42, 58, 0.35);
+    --radius: 0px;
+    --radius-chip: 4px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #17181a;
-      --surface: #232427;
-      --text: #f1f2f4;
-      --muted: #9aa0a6;
-      --border: #34363a;
-      --shadow: 0 1px 3px rgba(0,0,0,0.4);
+      --bg: #211d36;
+      --surface: #2b2547;
+      --surface-alt: #342c58;
+      --text: #f5efe0;
+      --muted: #b0a8c4;
+      --ink: #f5efe0;
+      --work: #6fb2ff;
+      --personal: #ff8ecb;
+      --danger: #ff7a9c;
+      --success: #56e0cf;
+      --primary: #ffd166;
+      --shadow-c: rgba(0, 0, 0, 0.55);
     }
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   body {
     margin: 0;
-    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", Roboto, sans-serif;
+    font-family: 'Prompt', -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
+  h1, h3, strong, button, .tab-btn, .filter-btn { font-family: 'Prompt', sans-serif; }
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 14px 18px;
     background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 3px solid var(--ink);
     position: sticky;
     top: 0;
     z-index: 20;
   }
-  header h1 { font-size: 18px; margin: 0; }
+  header h1 { font-size: 19px; margin: 0; font-weight: 700; letter-spacing: .2px; }
   button {
     font: inherit;
-    border: 1px solid var(--border);
+    font-weight: 600;
+    border: 2px solid var(--ink);
     background: var(--surface);
-    color: var(--text);
-    border-radius: 8px;
-    padding: 7px 12px;
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 7px 13px;
     cursor: pointer;
+    box-shadow: 3px 3px 0 var(--shadow-c);
+    transition: transform .08s ease, box-shadow .08s ease;
   }
-  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--shadow-c); }
+  button:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--shadow-c); }
+  button.primary { background: var(--primary); color: var(--ink); border-color: var(--ink); }
   button.danger-outline { color: var(--danger); border-color: var(--danger); }
-  button:disabled { opacity: .5; cursor: default; }
-  #userArea { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-  main { max-width: 960px; margin: 0 auto; padding: 14px 16px 60px; }
-  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .tabs, .filters { display: flex; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 4px; }
-  .tab-btn, .filter-btn { border: none; background: transparent; padding: 6px 12px; border-radius: 7px; }
-  .tab-btn.active, .filter-btn.active { background: var(--accent); color: #fff; }
+  button:disabled { opacity: .5; cursor: default; transform: none; box-shadow: 3px 3px 0 var(--shadow-c); }
+  #userArea { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); font-weight: 500; }
+  main { max-width: 960px; margin: 0 auto; padding: 18px 16px 60px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+  .tabs, .filters { display: flex; gap: 4px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 4px; box-shadow: 3px 3px 0 var(--shadow-c); }
+  .tab-btn, .filter-btn { border: none; background: transparent; box-shadow: none; padding: 6px 13px; border-radius: 2px; font-weight: 600; }
+  .tab-btn:hover, .filter-btn:hover { transform: none; box-shadow: none; background: var(--surface-alt); }
+  .tab-btn.active, .filter-btn.active { background: var(--primary); color: var(--ink); }
   .toolbar .spacer { flex: 1; }
-  #statusMsg { font-size: 13px; color: var(--muted); min-height: 18px; margin-bottom: 8px; }
-  #statusMsg.error { color: var(--danger); }
-  #reconnectBar { display: none; background: #fff3cd; color: #664d03; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; align-items: center; gap: 10px; }
+  #statusMsg { font-size: 13px; color: var(--muted); min-height: 18px; margin-bottom: 8px; font-weight: 500; }
+  #statusMsg.error { color: var(--danger); font-weight: 600; }
+  #reconnectBar { display: none; background: var(--primary); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--shadow-c); padding: 10px 14px; border-radius: var(--radius); margin-bottom: 14px; align-items: center; gap: 10px; font-weight: 600; }
   form#taskForm {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 14px; margin-bottom: 14px; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr);
+    background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--shadow-c);
+    padding: 16px; margin-bottom: 16px; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr);
   }
-  form#taskForm label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+  form#taskForm label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--muted); font-weight: 600; }
   form#taskForm input, form#taskForm select, form#taskForm textarea {
-    font: inherit; padding: 7px 9px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    font: inherit; padding: 8px 10px; border-radius: 2px; border: 2px solid var(--ink); background: var(--bg); color: var(--text);
   }
   form#taskForm .full { grid-column: 1 / -1; }
-  form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 8px; }
+  form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 10px; }
 
-  .chip { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; color: #fff; }
+  .chip { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: var(--radius-chip); color: #fff; border: 2px solid var(--ink); }
   .chip.work { background: var(--work); }
   .chip.personal { background: var(--personal); }
 
@@ -91,50 +110,53 @@
   .view.active { display: block; }
 
   /* Calendar */
-  #calHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  #calHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  #calHeader strong { font-size: 16px; }
   #calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-  .cal-daylabel { text-align: center; font-size: 12px; color: var(--muted); padding-bottom: 4px; }
+  .cal-daylabel { text-align: center; font-size: 12px; color: var(--muted); font-weight: 700; padding-bottom: 4px; }
   .cal-cell {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
     min-height: 78px; padding: 5px; font-size: 12px; cursor: pointer; overflow: hidden;
+    box-shadow: 2px 2px 0 var(--shadow-c); transition: transform .08s ease, box-shadow .08s ease;
   }
-  .cal-cell.muted { opacity: .4; }
-  .cal-cell.today { border-color: var(--accent); border-width: 2px; }
-  .cal-cell .daynum { font-weight: 600; margin-bottom: 3px; }
-  .cal-task-chip { display: block; font-size: 10.5px; padding: 1px 4px; border-radius: 4px; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #dayDetail { margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: none; }
+  .cal-cell:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--shadow-c); }
+  .cal-cell.muted { opacity: .35; box-shadow: none; }
+  .cal-cell.today { background: var(--surface-alt); border-color: var(--primary); box-shadow: 2px 2px 0 var(--primary); }
+  .cal-cell .daynum { font-weight: 700; margin-bottom: 3px; }
+  .cal-task-chip { display: block; font-size: 10.5px; font-weight: 700; padding: 1px 4px; border-radius: 2px; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #dayDetail { margin-top: 16px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--shadow-c); padding: 14px; display: none; }
 
   /* Kanban */
-  #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 10px; overflow-x: auto; }
-  .kanban-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px; min-height: 200px; }
-  .kanban-col h3 { font-size: 13px; margin: 4px 4px 8px; color: var(--muted); }
-  .task-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-bottom: 8px; }
-  .task-card .title { font-size: 13px; margin-bottom: 4px; }
-  .task-card .meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 12px; overflow-x: auto; }
+  .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 3px 3px 0 var(--shadow-c); padding: 10px; min-height: 200px; }
+  .kanban-col h3 { font-size: 13px; margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; box-shadow: 2px 2px 0 var(--shadow-c); }
+  .task-card .title { font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+  .task-card .meta { font-size: 11px; color: var(--muted); margin-bottom: 7px; font-weight: 500; }
   .task-card .row { display: flex; gap: 6px; align-items: center; }
-  .task-card select { flex: 1; font-size: 12px; }
-  .task-card button.icon { padding: 4px 7px; font-size: 12px; }
+  .task-card select { flex: 1; font-size: 12px; padding: 5px 6px; }
+  .task-card button.icon { padding: 5px 8px; font-size: 12px; }
 
   /* List */
-  .list-section { margin-bottom: 18px; }
-  .list-section h3 { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+  .list-section { margin-bottom: 20px; }
+  .list-section h3 { font-size: 13px; color: var(--muted); margin: 0 0 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
   .list-item {
     display: flex; align-items: center; gap: 10px; background: var(--surface);
-    border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px;
+    border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 2px 2px 0 var(--shadow-c); padding: 9px 12px; margin-bottom: 8px;
   }
-  .list-item .title { flex: 1; font-size: 14px; }
+  .list-item .title { flex: 1; font-size: 14px; font-weight: 500; }
   .list-item .title.done { text-decoration: line-through; color: var(--muted); }
-  .list-item .due { font-size: 12px; color: var(--muted); }
-  .empty-hint { color: var(--muted); font-size: 13px; padding: 10px 0; }
+  .list-item .due { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .empty-hint { color: var(--muted); font-size: 13px; padding: 10px 0; font-weight: 500; }
 
   #signInGate { max-width: 420px; margin: 60px auto; text-align: center; padding: 24px; }
-  #signInGate p { color: var(--muted); font-size: 14px; }
+  #signInGate p { color: var(--muted); font-size: 14px; font-weight: 500; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🗂️ Life Dashboard</h1>
+  <h1>🌈 Life Dashboard</h1>
   <div id="authArea">
     <button id="signInBtn" class="primary">เข้าสู่ระบบด้วย Google</button>
     <div id="userArea" hidden>
@@ -156,17 +178,17 @@
 
   <div class="toolbar">
     <div class="tabs">
-      <button data-tab="list" class="tab-btn">รายการ</button>
-      <button data-tab="kanban" class="tab-btn">คัมบัง</button>
-      <button data-tab="calendar" class="tab-btn">ปฏิทิน</button>
+      <button data-tab="list" class="tab-btn">📋 รายการ</button>
+      <button data-tab="kanban" class="tab-btn">🗂️ คัมบัง</button>
+      <button data-tab="calendar" class="tab-btn">📅 ปฏิทิน</button>
     </div>
     <div class="filters">
-      <button data-filter="all" class="filter-btn">ทั้งหมด</button>
-      <button data-filter="work" class="filter-btn">งาน</button>
-      <button data-filter="personal" class="filter-btn">ส่วนตัว</button>
+      <button data-filter="all" class="filter-btn">✨ ทั้งหมด</button>
+      <button data-filter="work" class="filter-btn">💼 งาน</button>
+      <button data-filter="personal" class="filter-btn">🌿 ส่วนตัว</button>
     </div>
     <div class="spacer"></div>
-    <button id="addTaskBtn" class="primary">+ เพิ่มงาน</button>
+    <button id="addTaskBtn" class="primary">＋ เพิ่มงาน</button>
   </div>
 
   <div id="statusMsg"></div>
