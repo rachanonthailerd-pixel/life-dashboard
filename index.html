@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script src="https://accounts.google.com/gsi/client" defer></script>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --text: #1c1e21;
+    --muted: #6b7280;
+    --border: #e2e4e8;
+    --accent: #4285F4;
+    --work: #4285F4;
+    --personal: #34A853;
+    --danger: #ea4335;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181a;
+      --surface: #232427;
+      --text: #f1f2f4;
+      --muted: #9aa0a6;
+      --border: #34363a;
+      --shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  button {
+    font: inherit;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+  }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.danger-outline { color: var(--danger); border-color: var(--danger); }
+  button:disabled { opacity: .5; cursor: default; }
+  #userArea { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  main { max-width: 960px; margin: 0 auto; padding: 14px 16px 60px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .tabs, .filters { display: flex; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 4px; }
+  .tab-btn, .filter-btn { border: none; background: transparent; padding: 6px 12px; border-radius: 7px; }
+  .tab-btn.active, .filter-btn.active { background: var(--accent); color: #fff; }
+  .toolbar .spacer { flex: 1; }
+  #statusMsg { font-size: 13px; color: var(--muted); min-height: 18px; margin-bottom: 8px; }
+  #statusMsg.error { color: var(--danger); }
+  #reconnectBar { display: none; background: #fff3cd; color: #664d03; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; align-items: center; gap: 10px; }
+  form#taskForm {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px; margin-bottom: 14px; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr);
+  }
+  form#taskForm label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+  form#taskForm input, form#taskForm select, form#taskForm textarea {
+    font: inherit; padding: 7px 9px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  }
+  form#taskForm .full { grid-column: 1 / -1; }
+  form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 8px; }
+
+  .chip { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; color: #fff; }
+  .chip.work { background: var(--work); }
+  .chip.personal { background: var(--personal); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Calendar */
+  #calHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  #calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-daylabel { text-align: center; font-size: 12px; color: var(--muted); padding-bottom: 4px; }
+  .cal-cell {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    min-height: 78px; padding: 5px; font-size: 12px; cursor: pointer; overflow: hidden;
+  }
+  .cal-cell.muted { opacity: .4; }
+  .cal-cell.today { border-color: var(--accent); border-width: 2px; }
+  .cal-cell .daynum { font-weight: 600; margin-bottom: 3px; }
+  .cal-task-chip { display: block; font-size: 10.5px; padding: 1px 4px; border-radius: 4px; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #dayDetail { margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: none; }
+
+  /* Kanban */
+  #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 10px; overflow-x: auto; }
+  .kanban-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px; min-height: 200px; }
+  .kanban-col h3 { font-size: 13px; margin: 4px 4px 8px; color: var(--muted); }
+  .task-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-bottom: 8px; }
+  .task-card .title { font-size: 13px; margin-bottom: 4px; }
+  .task-card .meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .task-card .row { display: flex; gap: 6px; align-items: center; }
+  .task-card select { flex: 1; font-size: 12px; }
+  .task-card button.icon { padding: 4px 7px; font-size: 12px; }
+
+  /* List */
+  .list-section { margin-bottom: 18px; }
+  .list-section h3 { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+  .list-item {
+    display: flex; align-items: center; gap: 10px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px;
+  }
+  .list-item .title { flex: 1; font-size: 14px; }
+  .list-item .title.done { text-decoration: line-through; color: var(--muted); }
+  .list-item .due { font-size: 12px; color: var(--muted); }
+  .empty-hint { color: var(--muted); font-size: 13px; padding: 10px 0; }
+
+  #signInGate { max-width: 420px; margin: 60px auto; text-align: center; padding: 24px; }
+  #signInGate p { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🗂️ Life Dashboard</h1>
+  <div id="authArea">
+    <button id="signInBtn" class="primary">เข้าสู่ระบบด้วย Google</button>
+    <div id="userArea" hidden>
+      <span id="userStatus">เชื่อมต่อแล้ว</span>
+      <button id="signOutBtn">ออกจากระบบ</button>
+    </div>
+  </div>
+</header>
+
+<div id="signInGate">
+  <p>เข้าสู่ระบบด้วยบัญชี Google ที่ตั้งใจใช้กับระบบนี้เพื่อเริ่มใช้งาน ข้อมูลทั้งหมดจะถูกเก็บใน Google ปฏิทิน / ชีตของบัญชีนั้นเท่านั้น</p>
+</div>
+
+<main id="app" hidden>
+  <div id="reconnectBar">
+    <span>เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่เพื่อทำงานต่อ</span>
+    <button id="reconnectBtn" class="primary">เข้าสู่ระบบใหม่</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="tabs">
+      <button data-tab="list" class="tab-btn">รายการ</button>
+      <button data-tab="kanban" class="tab-btn">คัมบัง</button>
+      <button data-tab="calendar" class="tab-btn">ปฏิทิน</button>
+    </div>
+    <div class="filters">
+      <button data-filter="all" class="filter-btn">ทั้งหมด</button>
+      <button data-filter="work" class="filter-btn">งาน</button>
+      <button data-filter="personal" class="filter-btn">ส่วนตัว</button>
+    </div>
+    <div class="spacer"></div>
+    <button id="addTaskBtn" class="primary">+ เพิ่มงาน</button>
+  </div>
+
+  <div id="statusMsg"></div>
+
+  <form id="taskForm" hidden>
+    <label class="full">ชื่องาน
+      <input type="text" id="f_title" required maxlength="200">
+    </label>
+    <label>ประเภท
+      <select id="f_project">
+        <option value="work">งาน</option>
+        <option value="personal">ส่วนตัว</option>
+      </select>
+    </label>
+    <label>สถานะเริ่มต้น
+      <select id="f_status">
+        <option value="backlog">Backlog</option>
+        <option value="todo" selected>Todo</option>
+        <option value="doing">Doing</option>
+      </select>
+    </label>
+    <label>วันที่กำหนด (ไม่บังคับ)
+      <input type="date" id="f_date">
+    </label>
+    <label>เวลา (ถ้ามี จะสร้างนัดใน Google ปฏิทินและแจ้งเตือนจริง)
+      <input type="time" id="f_time">
+    </label>
+    <label>ความสำคัญ
+      <select id="f_priority">
+        <option value="">-</option>
+        <option value="low">ต่ำ</option>
+        <option value="medium">กลาง</option>
+        <option value="high">สูง</option>
+      </select>
+    </label>
+    <label class="full">โน้ต
+      <textarea id="f_notes" rows="2"></textarea>
+    </label>
+    <div class="actions">
+      <button type="submit" class="primary">บันทึก</button>
+      <button type="button" id="cancelAddBtn">ยกเลิก</button>
+    </div>
+  </form>
+
+  <section id="listView" class="view"></section>
+
+  <section id="kanbanView" class="view">
+    <div id="kanbanCols"></div>
+  </section>
+
+  <section id="calendarView" class="view">
+    <div id="calHeader">
+      <button id="calPrev">←</button>
+      <strong id="calLabel"></strong>
+      <button id="calNext">→</button>
+    </div>
+    <div id="calGrid"></div>
+    <div id="dayDetail"></div>
+  </section>
+</main>
+
+<script>
+const CLIENT_ID = '727769136864-6j2lah8gkadoclleodp58lif355o7pb1.apps.googleusercontent.com';
+const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file';
+const SHEETS_BASE = 'https://sheets.googleapis.com/v4';
+const DRIVE_BASE = 'https://www.googleapis.com/drive/v3';
+const CAL_BASE = 'https://www.googleapis.com/calendar/v3';
+const SPREADSHEET_NAME = 'Life Dashboard Master Board';
+const WORK_CAL_NAME = 'งาน (Life Dashboard)';
+const PERSONAL_CAL_NAME = 'ส่วนตัว (Life Dashboard)';
+const STATUSES = ['backlog', 'todo', 'doing', 'done'];
+const STATUS_LABEL = { backlog: 'Backlog', todo: 'Todo', doing: 'Doing', done: 'Done' };
+const THAI_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const DAY_LABELS = ['อา','จ','อ','พ','พฤ','ศ','ส'];
+
+let tokenClient, accessToken = null, tokenResolve = null;
+let spreadsheetId = null, tasksSheetId = null;
+let workCalendarId = null, personalCalendarId = null;
+let tasks = [];
+let activeTab = 'list';
+let activeFilter = 'all';
+let calYear, calMonth;
+let today = new Date();
+today.setHours(0,0,0,0);
+
+function initGis() {
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
+    callback: (resp) => {
+      if (resp.error) { console.error(resp); if (tokenResolve) tokenResolve(null); return; }
+      accessToken = resp.access_token;
+      if (tokenResolve) { const r = tokenResolve; tokenResolve = null; r(accessToken); }
+    },
+  });
+}
+
+function requestToken(consent) {
+  return new Promise((resolve) => {
+    tokenResolve = resolve;
+    tokenClient.requestAccessToken({ prompt: consent ? 'consent' : '' });
+  });
+}
+
+async function apiFetch(url, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({ 'Authorization': 'Bearer ' + accessToken }, opts.headers || {});
+  let res = await fetch(url, opts);
+  if (res.status === 401) {
+    showReconnect();
+    throw new Error('unauthorized');
+  }
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(res.status + ': ' + t);
+  }
+  if (res.status === 204) return null;
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+function showReconnect() { document.getElementById('reconnectBar').style.display = 'flex'; }
+function hideReconnect() { document.getElementById('reconnectBar').style.display = 'none'; }
+
+function setStatus(msg, isError) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg || '';
+  el.className = isError ? 'error' : '';
+}
+
+async function findOrCreateSpreadsheet() {
+  const q = encodeURIComponent(`name='${SPREADSHEET_NAME}' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false`);
+  const found = await apiFetch(`${DRIVE_BASE}/files?q=${q}&fields=files(id,name)`);
+  if (found.files && found.files.length) {
+    spreadsheetId = found.files[0].id;
+  } else {
+    const created = await apiFetch(`${SHEETS_BASE}/spreadsheets`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ properties: { title: SPREADSHEET_NAME }, sheets: [{ properties: { title: 'Tasks' } }] }),
+    });
+    spreadsheetId = created.spreadsheetId;
+    await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!A1:H1?valueInputOption=RAW`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ values: [['id','title','project','status','due','priority','notes','calendarEventId']] }),
+    });
+  }
+  const meta = await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}?fields=sheets.properties`);
+  const tSheet = meta.sheets.find(s => s.properties.title === 'Tasks');
+  tasksSheetId = tSheet.properties.sheetId;
+}
+
+async function findOrCreateCalendar(name, colorHex) {
+  const list = await apiFetch(`${CAL_BASE}/users/me/calendarList?maxResults=250`);
+  let entry = (list.items || []).find(c => c.summary === name);
+  let id;
+  if (entry) {
+    id = entry.id;
+  } else {
+    const created = await apiFetch(`${CAL_BASE}/calendars`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ summary: name }),
+    });
+    id = created.id;
+    await apiFetch(`${CAL_BASE}/users/me/calendarList/${encodeURIComponent(id)}?colorRgbFormat=true`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ backgroundColor: colorHex, foregroundColor: '#ffffff' }),
+    });
+  }
+  return id;
+}
+
+async function findOrCreateCalendars() {
+  workCalendarId = await findOrCreateCalendar(WORK_CAL_NAME, '#4285F4');
+  personalCalendarId = await findOrCreateCalendar(PERSONAL_CAL_NAME, '#34A853');
+}
+
+function calendarIdForProject(project) {
+  return project === 'work' ? workCalendarId : personalCalendarId;
+}
+
+async function loadTasks() {
+  const resp = await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!A2:H`);
+  const rows = resp.values || [];
+  tasks = rows.map((r, i) => ({
+    rowNum: i + 2,
+    id: r[0] || '',
+    title: r[1] || '',
+    project: r[2] || 'work',
+    status: r[3] || 'todo',
+    due: r[4] || '',
+    priority: r[5] || '',
+    notes: r[6] || '',
+    calendarEventId: r[7] || '',
+  })).filter(t => t.id);
+}
+
+function localIsoOffset(d) {
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:00`;
+}
+
+async function addTask(data) {
+  const id = 't_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const row = [id, data.title, data.project, data.status, data.due, data.priority, data.notes, ''];
+  const appendResp = await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!A:H:append?valueInputOption=RAW`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ values: [row] }),
+  });
+  const range = appendResp.updates.updatedRange;
+  const rowNum = parseInt(range.split('!')[1].match(/\d+/)[0], 10);
+
+  if (data.due && data.due.includes('T')) {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const start = new Date(data.due);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const calId = calendarIdForProject(data.project);
+    const event = await apiFetch(`${CAL_BASE}/calendars/${encodeURIComponent(calId)}/events`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        summary: data.title,
+        description: data.notes || '',
+        start: { dateTime: localIsoOffset(start), timeZone: tz },
+        end: { dateTime: localIsoOffset(end), timeZone: tz },
+      }),
+    });
+    await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!H${rowNum}?valueInputOption=RAW`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ values: [[event.id]] }),
+    });
+  }
+  await loadTasks();
+}
+
+async function updateTaskStatus(task, newStatus) {
+  task.status = newStatus;
+  render();
+  await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!D${task.rowNum}?valueInputOption=RAW`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ values: [[newStatus]] }),
+  });
+}
+
+function bindDeleteButtons(root, afterDelete) {
+  root.querySelectorAll('[data-action="delete"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (btn.dataset.confirming) {
+        const t = tasks.find(x => x.id === btn.dataset.id);
+        deleteTask(t).then(() => { if (afterDelete) afterDelete(); });
+        return;
+      }
+      btn.dataset.confirming = '1';
+      const original = btn.textContent;
+      btn.textContent = 'ยืนยัน?';
+      setTimeout(() => { delete btn.dataset.confirming; btn.textContent = original; }, 2500);
+    });
+  });
+}
+
+async function deleteTask(task) {
+  if (task.calendarEventId) {
+    try {
+      await apiFetch(`${CAL_BASE}/calendars/${encodeURIComponent(calendarIdForProject(task.project))}/events/${task.calendarEventId}`, { method: 'DELETE' });
+    } catch (e) { /* event may already be gone */ }
+  }
+  await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}:batchUpdate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      requests: [{ deleteDimension: { range: { sheetId: tasksSheetId, dimension: 'ROWS', startIndex: task.rowNum - 1, endIndex: task.rowNum } } }],
+    }),
+  });
+  await loadTasks();
+  render();
+}
+
+function filteredTasks() {
+  return tasks.filter(t => activeFilter === 'all' || t.project === activeFilter);
+}
+
+function dueDateOnly(due) {
+  if (!due) return null;
+  return due.split('T')[0];
+}
+
+function fmtDue(due) {
+  if (!due) return '';
+  if (due.includes('T')) {
+    const d = new Date(due);
+    return d.toLocaleString('th-TH', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+  const d = new Date(due + 'T00:00');
+  return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function render() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === activeTab));
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === activeFilter));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === activeTab + 'View'));
+  if (activeTab === 'list') renderList();
+  else if (activeTab === 'kanban') renderKanban();
+  else renderCalendar();
+}
+
+function renderList() {
+  const el = document.getElementById('listView');
+  const list = filteredTasks();
+  const todayStr = dueDateOnly(localIsoOffset(today));
+  const weekAhead = new Date(today); weekAhead.setDate(weekAhead.getDate() + 7);
+  const weekStr = dueDateOnly(localIsoOffset(weekAhead));
+
+  const groups = { overdue: [], today: [], week: [], nodate: [], done: [] };
+  list.forEach(t => {
+    if (t.status === 'done') { groups.done.push(t); return; }
+    const d = dueDateOnly(t.due);
+    if (!d) { groups.nodate.push(t); }
+    else if (d < todayStr) { groups.overdue.push(t); }
+    else if (d === todayStr) { groups.today.push(t); }
+    else if (d <= weekStr) { groups.week.push(t); }
+    else { groups.nodate.push(t); }
+  });
+
+  const sections = [
+    ['เลยกำหนด', groups.overdue],
+    ['วันนี้', groups.today],
+    ['สัปดาห์นี้', groups.week],
+    ['ไม่มีกำหนด / ในอนาคต', groups.nodate],
+    ['เสร็จแล้ว', groups.done],
+  ];
+
+  el.innerHTML = sections.map(([label, items]) => {
+    if (!items.length) return '';
+    const rows = items.map(t => `
+      <div class="list-item">
+        <input type="checkbox" ${t.status === 'done' ? 'checked' : ''} data-id="${t.id}" class="done-toggle">
+        <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
+        <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
+        <span class="due">${fmtDue(t.due)}</span>
+        <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
+      </div>`).join('');
+    return `<div class="list-section"><h3>${label} (${items.length})</h3>${rows}</div>`;
+  }).join('') || '<div class="empty-hint">ยังไม่มีงาน กด "+ เพิ่มงาน" เพื่อเริ่มต้น</div>';
+
+  el.querySelectorAll('.done-toggle').forEach(cb => cb.addEventListener('change', (e) => {
+    const t = tasks.find(x => x.id === e.target.dataset.id);
+    updateTaskStatus(t, e.target.checked ? 'done' : 'todo');
+  }));
+  bindDeleteButtons(el);
+}
+
+function renderKanban() {
+  const el = document.getElementById('kanbanCols');
+  const list = filteredTasks();
+  el.innerHTML = STATUSES.map(status => {
+    const items = list.filter(t => t.status === status);
+    const cards = items.map(t => `
+      <div class="task-card">
+        <div class="title">${escapeHtml(t.title)}</div>
+        <div class="meta"><span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span> ${fmtDue(t.due)}</div>
+        <div class="row">
+          <select data-id="${t.id}" class="status-select">
+            ${STATUSES.map(s => `<option value="${s}" ${s === status ? 'selected' : ''}>${STATUS_LABEL[s]}</option>`).join('')}
+          </select>
+          <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
+        </div>
+      </div>`).join('');
+    return `<div class="kanban-col"><h3>${STATUS_LABEL[status]} (${items.length})</h3>${cards}</div>`;
+  }).join('');
+
+  el.querySelectorAll('.status-select').forEach(sel => sel.addEventListener('change', (e) => {
+    const t = tasks.find(x => x.id === e.target.dataset.id);
+    updateTaskStatus(t, e.target.value);
+  }));
+  bindDeleteButtons(el);
+}
+
+function renderCalendar() {
+  document.getElementById('calLabel').textContent = `${THAI_MONTHS[calMonth]} ${calYear}`;
+  const grid = document.getElementById('calGrid');
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
+  const list = filteredTasks();
+
+  const tasksByDate = {};
+  list.forEach(t => {
+    const d = dueDateOnly(t.due);
+    if (!d) return;
+    (tasksByDate[d] = tasksByDate[d] || []).push(t);
+  });
+
+  let cellsHtml = DAY_LABELS.map(d => `<div class="cal-daylabel">${d}</div>`).join('');
+  const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+  for (let i = 0; i < totalCells; i++) {
+    const dayNum = i - firstDay + 1;
+    let y = calYear, m = calMonth, num = dayNum, muted = false;
+    if (dayNum < 1) { num = prevMonthDays + dayNum; m = calMonth - 1; muted = true; }
+    else if (dayNum > daysInMonth) { num = dayNum - daysInMonth; m = calMonth + 1; muted = true; }
+    if (m < 0) { m = 11; y -= 1; } else if (m > 11) { m = 0; y += 1; }
+    const pad = n => String(n).padStart(2, '0');
+    const iso = `${y}-${pad(m + 1)}-${pad(num)}`;
+    const isToday = iso === dueDateOnly(localIsoOffset(today));
+    const dayTasks = tasksByDate[iso] || [];
+    const chips = dayTasks.slice(0, 3).map(t => `<span class="cal-task-chip" style="background:var(--${t.project})">${escapeHtml(t.title)}</span>`).join('');
+    const more = dayTasks.length > 3 ? `<span style="font-size:10px;color:var(--muted)">+${dayTasks.length - 3} เพิ่มเติม</span>` : '';
+    cellsHtml += `<div class="cal-cell ${muted ? 'muted' : ''} ${isToday ? 'today' : ''}" data-date="${iso}">
+      <div class="daynum">${num}</div>${chips}${more}
+    </div>`;
+  }
+  grid.innerHTML = cellsHtml;
+  grid.querySelectorAll('.cal-cell').forEach(cell => cell.addEventListener('click', () => showDayDetail(cell.dataset.date, tasksByDate[cell.dataset.date] || [])));
+}
+
+function showDayDetail(iso, items) {
+  const el = document.getElementById('dayDetail');
+  const d = new Date(iso + 'T00:00');
+  const label = d.toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  if (!items.length) {
+    el.innerHTML = `<strong>${label}</strong><div class="empty-hint">ไม่มีงานวันนี้</div>`;
+  } else {
+    const rows = items.map(t => `
+      <div class="list-item">
+        <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
+        <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
+        <span class="due">${fmtDue(t.due)}</span>
+        <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
+      </div>`).join('');
+    el.innerHTML = `<strong>${label}</strong>${rows}`;
+    bindDeleteButtons(el, renderCalendar);
+  }
+  el.style.display = 'block';
+}
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function showApp() {
+  document.getElementById('signInGate').hidden = true;
+  document.getElementById('app').hidden = false;
+  document.getElementById('signInBtn').hidden = true;
+  document.getElementById('userArea').hidden = false;
+}
+
+async function onSignedIn() {
+  try {
+    setStatus('กำลังเตรียมข้อมูล...');
+    await findOrCreateSpreadsheet();
+    await findOrCreateCalendars();
+    await loadTasks();
+    hideReconnect();
+    showApp();
+    setStatus('');
+    render();
+  } catch (e) {
+    console.error(e);
+    setStatus('เกิดข้อผิดพลาด: ' + e.message, true);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  calYear = today.getFullYear();
+  calMonth = today.getMonth();
+  initGis();
+
+  document.getElementById('signInBtn').addEventListener('click', async () => {
+    const t = await requestToken(false);
+    if (t) onSignedIn();
+  });
+  document.getElementById('reconnectBtn').addEventListener('click', async () => {
+    const t = await requestToken(true);
+    if (t) { hideReconnect(); onSignedIn(); }
+  });
+  document.getElementById('signOutBtn').addEventListener('click', () => {
+    if (accessToken) google.accounts.oauth2.revoke(accessToken, () => {});
+    accessToken = null;
+    location.reload();
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => { activeTab = b.dataset.tab; render(); }));
+  document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { activeFilter = b.dataset.filter; render(); }));
+
+  document.getElementById('addTaskBtn').addEventListener('click', () => {
+    document.getElementById('taskForm').hidden = !document.getElementById('taskForm').hidden;
+  });
+  document.getElementById('cancelAddBtn').addEventListener('click', () => {
+    document.getElementById('taskForm').hidden = true;
+    document.getElementById('taskForm').reset();
+  });
+  document.getElementById('taskForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('f_title').value.trim();
+    if (!title) return;
+    const date = document.getElementById('f_date').value;
+    const time = document.getElementById('f_time').value;
+    const due = date ? (time ? `${date}T${time}` : date) : '';
+    const data = {
+      title,
+      project: document.getElementById('f_project').value,
+      status: document.getElementById('f_status').value,
+      due,
+      priority: document.getElementById('f_priority').value,
+      notes: document.getElementById('f_notes').value.trim(),
+    };
+    setStatus('กำลังบันทึก...');
+    try {
+      await addTask(data);
+      document.getElementById('taskForm').reset();
+      document.getElementById('taskForm').hidden = true;
+      setStatus('');
+      render();
+    } catch (err) {
+      console.error(err);
+      setStatus('บันทึกไม่สำเร็จ: ' + err.message, true);
+    }
+  });
+
+  document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); document.getElementById('dayDetail').style.display = 'none'; });
+  document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); document.getElementById('dayDetail').style.display = 'none'; });
+});
+</script>
+</body>
+</html>
