@@ -26,6 +26,7 @@
     --danger-edge: #c62f52;
     --radius: 0px;
     --radius-chip: 4px;
+    --on-accent: #ffffff;
     --fs-micro: 11px;
     --fs-body: 14px;
     --fs-heading: 18px;
@@ -112,7 +113,7 @@
   main { max-width: 960px; margin: 0 auto; padding: 18px 16px 60px; }
   .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
   .tabs, .filters { display: flex; gap: 4px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 4px; }
-  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; padding: 6px 13px; border-radius: 2px; font-weight: 600; }
+  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; padding: 6px 13px; border-radius: var(--radius); font-weight: 600; }
   .tab-btn::after, .filter-btn::after { display: none; }
   .tab-btn:hover, .filter-btn:hover { transform: none; background: var(--surface-alt); }
   .tab-btn.active, .filter-btn.active { background: var(--primary); color: var(--ink); }
@@ -126,12 +127,12 @@
   }
   form#taskForm label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-micro); color: var(--muted); font-weight: 600; }
   form#taskForm input, form#taskForm select, form#taskForm textarea {
-    font: inherit; padding: 8px 10px; border-radius: 2px; border: 2px solid var(--ink); background: var(--bg); color: var(--text);
+    font: inherit; padding: 8px 10px; border-radius: var(--radius); border: 2px solid var(--ink); background: var(--bg); color: var(--text);
   }
   form#taskForm .full { grid-column: 1 / -1; }
   form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 10px; }
 
-  .chip { display: inline-block; font-size: var(--fs-micro); font-weight: 700; padding: 3px 9px; border-radius: var(--radius-chip); color: #fff; }
+  .chip { display: inline-block; font-size: var(--fs-micro); font-weight: 700; padding: 3px 9px; border-radius: var(--radius-chip); color: var(--on-accent); }
   .chip.work { background: var(--work); }
   .chip.personal { background: var(--personal); }
 
@@ -152,7 +153,7 @@
   .cal-cell.muted { opacity: .35; }
   .cal-cell.today { background: var(--surface-alt); border-color: var(--primary); border-width: 3px; }
   .cal-cell .daynum { font-weight: 700; margin-bottom: 3px; }
-  .cal-task-chip { display: block; font-size: var(--fs-micro); font-weight: 700; padding: 1px 4px; border-radius: 2px; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cal-task-chip { display: block; font-size: var(--fs-micro); font-weight: 700; padding: 1px 4px; border-radius: var(--radius-chip); color: var(--on-accent); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #dayDetail { margin-top: 16px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 14px; display: none; }
 
   /* Kanban */
