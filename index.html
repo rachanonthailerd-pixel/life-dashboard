@@ -29,6 +29,7 @@
     --on-accent: #0b0d16;
     --on-primary: #0b0d16;
     --radius: 10px;
+    --radius-sm: 6px;
     --radius-chip: 999px;
     --fs-micro: 11px;
     --fs-body: 14px;
@@ -108,7 +109,7 @@
   main { max-width: 960px; margin: 0 auto; padding: 18px 16px 60px; }
   .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
   .tabs, .filters { display: flex; gap: 4px; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 4px; }
-  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; box-shadow: none; padding: 6px 13px; border-radius: calc(var(--radius) - 4px); font-weight: 600; }
+  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; box-shadow: none; padding: 6px 13px; border-radius: var(--radius-sm); font-weight: 600; }
   .tab-btn:hover, .filter-btn:hover { transform: none; background: var(--surface-alt); }
   .tab-btn.active, .filter-btn.active { background: var(--primary); color: var(--on-primary); }
   .toolbar .spacer { flex: 1; }
@@ -121,7 +122,7 @@
   }
   form#taskForm label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-micro); color: var(--muted); font-weight: 600; }
   form#taskForm input, form#taskForm select, form#taskForm textarea {
-    font: inherit; padding: 8px 10px; border-radius: calc(var(--radius) - 4px); border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
+    font: inherit; padding: 8px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--bg); color: var(--text);
   }
   form#taskForm .full { grid-column: 1 / -1; }
   form#taskForm .form-title { font-size: var(--fs-heading); font-weight: 600; font-family: 'Kanit', sans-serif; }
@@ -146,7 +147,7 @@
   .cal-daylabel { text-align: center; font-size: var(--fs-micro); color: var(--muted); font-weight: 700; padding-bottom: 4px; }
   .cal-cell {
     position: relative;
-    background: var(--surface); border: 1.5px solid var(--border); border-radius: calc(var(--radius) - 4px);
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-sm);
     min-height: 78px; padding: 5px; font-size: var(--fs-micro); cursor: pointer; overflow: hidden;
     transition: background .1s ease, border-color .1s ease;
   }
@@ -165,13 +166,13 @@
   #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 12px; overflow-x: auto; }
   #kanbanCols::-webkit-scrollbar { height: 10px; }
   #kanbanCols::-webkit-scrollbar-track { background: var(--surface-alt); }
-  #kanbanCols::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+  #kanbanCols::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-sm); }
   .kanban-col { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 10px; min-height: 200px; max-height: 65vh; display: flex; flex-direction: column; }
   .kanban-col h2 { flex: none; font-size: var(--fs-micro); margin: 2px 4px 10px; padding-bottom: 6px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; font-family: 'Mitr', sans-serif; }
   .kanban-col-cards { overflow-y: auto; flex: 1 1 auto; margin: 0 -10px; padding: 0 10px; }
   .kanban-col-cards::-webkit-scrollbar { width: 8px; }
   .kanban-col-cards::-webkit-scrollbar-track { background: var(--surface-alt); }
-  .kanban-col-cards::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+  .kanban-col-cards::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-sm); }
   .kanban-col.status-done { border-color: var(--success); }
   .kanban-col.status-done h2 { color: var(--success); }
   .task-card { background: var(--surface-alt); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 9px; margin-bottom: 9px; cursor: pointer; transition: border-color .1s ease; }

@@ -40,6 +40,7 @@ typography:
 rounded:
   chip: "999px"
   panel: "10px"
+  sm: "6px"
 components:
   button-primary:
     backgroundColor: "{colors.amber-tube}"
@@ -145,7 +146,7 @@ Flat panels on a flat ground — no shadow, no blur, no ambient glow anywhere in
 
 ## Shapes
 
-Moderately rounded corners throughout (`--radius: 10px` for panels, buttons, cards, inputs, calendar cells) — a bent neon tube, not a cut-paper edge, and a deliberate departure from both prior worlds' sharp corners. The chip is the one shape taken further: fully pill-shaped (`--radius-chip: 999px`), reading as a closed loop of tube glass around its label.
+Moderately rounded corners throughout (`--radius: 10px` for panels, buttons, cards, and the top-level tab/filter pill container) — a bent neon tube, not a cut-paper edge, and a deliberate departure from both prior worlds' sharp corners. Elements nested one level inside a rounded container (individual tab/filter buttons, form inputs, calendar cells, scrollbar thumbs) use the smaller `--radius-sm: 6px` step, so a nested corner never reads as sharper or more rounded than its parent's curve. The chip is the one shape taken further: fully pill-shaped (`--radius-chip: 999px`), reading as a closed loop of tube glass around its label. The calendar's today-ring is a plain circle (`border-radius: 50%`), the universal CSS idiom for a round badge rather than a step in this scale.
 
 ## Components
 
