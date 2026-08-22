@@ -134,6 +134,7 @@
   }
   form#taskForm .full { grid-column: 1 / -1; }
   form#taskForm .form-title { font-size: var(--fs-heading); font-weight: 700; }
+  .field-hint { font-size: var(--fs-micro); color: var(--muted); font-weight: 500; text-align: right; }
   form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 10px; }
 
   .chip { display: inline-block; font-size: var(--fs-micro); font-weight: 700; padding: 3px 9px; border-radius: var(--radius-chip); color: var(--on-accent); }
@@ -179,7 +180,7 @@
   .kanban-col.status-done { border-top: 4px solid var(--success); }
   .kanban-col.status-done h2 { color: var(--success); }
   .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; cursor: pointer; }
-  .task-card .title { font-size: var(--fs-body); font-weight: 600; margin-bottom: 5px; }
+  .task-card .title { font-size: var(--fs-body); font-weight: 600; margin-bottom: 5px; overflow-wrap: break-word; word-break: break-word; }
   .task-card .meta { font-size: var(--fs-micro); color: var(--muted); margin-bottom: 7px; font-weight: 500; }
   .task-card .row { display: flex; gap: 6px; align-items: center; }
   .task-card select { flex: 1; font-size: var(--fs-micro); padding: 5px 6px; }
@@ -195,7 +196,7 @@
     cursor: pointer; transition: background .1s ease;
   }
   .list-item:hover { background: var(--surface-alt); }
-  .list-item .title { flex: 1; font-size: var(--fs-body); font-weight: 500; }
+  .list-item .title { flex: 1; min-width: 0; font-size: var(--fs-body); font-weight: 500; overflow-wrap: break-word; word-break: break-word; }
   .list-item .title.done { text-decoration: line-through; color: var(--muted); }
   .list-item .due { font-size: var(--fs-micro); color: var(--muted); font-weight: 600; }
   .list-item input[type="checkbox"] { accent-color: var(--primary); width: 17px; height: 17px; }
@@ -251,6 +252,7 @@
     <h2 id="formTitle" class="full form-title">เพิ่มงานใหม่</h2>
     <label class="full">ชื่องาน
       <input type="text" id="f_title" required maxlength="200">
+      <span id="titleCounter" class="field-hint" hidden></span>
     </label>
     <label>ประเภท
       <select id="f_project">
@@ -583,6 +585,13 @@ function setButtonLoading(btn, loading, loadingText) {
   }
 }
 
+function updateTitleCounter() {
+  const remaining = 200 - document.getElementById('f_title').value.length;
+  const hint = document.getElementById('titleCounter');
+  hint.hidden = remaining > 40;
+  if (!hint.hidden) hint.textContent = `เหลือ ${remaining} ตัวอักษร`;
+}
+
 function setFormMode(mode) {
   const isEdit = mode === 'edit';
   document.getElementById('formTitle').textContent = isEdit ? 'แก้ไขงาน' : 'เพิ่มงานใหม่';
@@ -600,6 +609,7 @@ function openEditForm(task) {
   document.getElementById('f_time').value = parts[1] ? parts[1].slice(0, 5) : '';
   document.getElementById('f_priority').value = task.priority || '';
   document.getElementById('f_notes').value = task.notes || '';
+  updateTitleCounter();
   setFormMode('edit');
   form.hidden = false;
   form.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -607,10 +617,17 @@ function openEditForm(task) {
 
 function bindCardClicks(root, selector) {
   root.querySelectorAll(selector).forEach(el => {
+    const t = tasks.find(x => x.id === el.dataset.id);
+    const open = () => { if (t) openEditForm(t); };
     el.addEventListener('click', (e) => {
       if (e.target.closest('button, select, input')) return;
-      const t = tasks.find(x => x.id === el.dataset.id);
-      if (t) openEditForm(t);
+      open();
+    });
+    el.tabIndex = 0;
+    if (t) el.setAttribute('aria-label', 'แก้ไขงาน: ' + t.title);
+    el.addEventListener('keydown', (e) => {
+      if (e.target !== el) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
   });
 }
@@ -891,14 +908,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     editingTaskId = null;
     form.reset();
+    updateTitleCounter();
     setFormMode('add');
     form.hidden = false;
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+  document.getElementById('f_title').addEventListener('input', updateTitleCounter);
   document.getElementById('cancelAddBtn').addEventListener('click', () => {
     document.getElementById('taskForm').hidden = true;
     document.getElementById('taskForm').reset();
     editingTaskId = null;
+    updateTitleCounter();
     setFormMode('add');
   });
   document.getElementById('taskForm').addEventListener('submit', async (e) => {
@@ -931,6 +951,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('taskForm').reset();
       document.getElementById('taskForm').hidden = true;
       editingTaskId = null;
+      updateTitleCounter();
       setFormMode('add');
       setStatus('');
       render();
