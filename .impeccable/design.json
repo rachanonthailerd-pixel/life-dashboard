@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-22T00:00:00.000Z",
+  "title": "Design System: Life Dashboard",
+  "extensions": {
+    "colorMeta": {
+      "sunny-amber": {
+        "role": "primary",
+        "displayName": "Sunny Amber",
+        "canonical": "#ffc23c",
+        "tonalRamp": [
+          "#473206",
+          "#845e0b",
+          "#c18a10",
+          "#edaf26",
+          "#f2c663",
+          "#f7d997",
+          "#faeac6",
+          "#fdf6e7"
+        ]
+      },
+      "sky-sherbet": {
+        "role": "secondary",
+        "displayName": "Sky Sherbet",
+        "canonical": "#3a86ff",
+        "tonalRamp": [
+          "#061f47",
+          "#0b3a84",
+          "#1054c1",
+          "#2673ed",
+          "#639bf2",
+          "#97bcf7",
+          "#c6dafa",
+          "#e7f0fd"
+        ]
+      },
+      "bubblegum-pink": {
+        "role": "secondary",
+        "displayName": "Bubblegum Pink",
+        "canonical": "#ef5da8",
+        "tonalRamp": [
+          "#410c27",
+          "#791649",
+          "#b1206b",
+          "#db388c",
+          "#e670ac",
+          "#eea0c8",
+          "#f6cbe1",
+          "#fbe9f2"
+        ]
+      },
+      "minty-fresh": {
+        "role": "tertiary",
+        "displayName": "Minty Fresh",
+        "canonical": "#2ec4b6",
+        "tonalRamp": [
+          "#123a37",
+          "#226d66",
+          "#31a095",
+          "#4cc8bc",
+          "#7fd7cf",
+          "#a9e4df",
+          "#d0f1ee",
+          "#ecf9f8"
+        ]
+      },
+      "cherry-fizz": {
+        "role": "tertiary",
+        "displayName": "Cherry Fizz",
+        "canonical": "#ef476f",
+        "tonalRamp": [
+          "#420b18",
+          "#7a142d",
+          "#b31e41",
+          "#dd365e",
+          "#e76f8b",
+          "#ef9fb2",
+          "#f6cbd5",
+          "#fbe9ed"
+        ]
+      },
+      "cocoa-ink": {
+        "role": "neutral",
+        "displayName": "Cocoa Ink",
+        "canonical": "#2d2a3a",
+        "tonalRamp": [
+          "#23212b",
+          "#413e51",
+          "#605a77",
+          "#807a9a",
+          "#a49fb6",
+          "#c2bfcf",
+          "#dedce5",
+          "#f1f1f4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The wordmark only."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Calendar month/year label."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Task titles, form fields, buttons, empty-state copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, meta text, section headers, calendar-cell contents."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "press",
+        "value": "transform .08s ease",
+        "purpose": "Button press: translateY(3px) onto its static pedestal on :active."
+      },
+      {
+        "name": "tint",
+        "value": "background .1s ease",
+        "purpose": "Hover tint shift on cards, cells, and buttons."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action button on a screen: sign in, add task, save.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">+ เพิ่มงาน</button>",
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); color: var(--ink, #2d2a3a); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; background: var(--ink, #2d2a3a); z-index: -1; } .ds-btn:active { transform: translateY(3px); } .ds-btn-primary { background: var(--primary, #ffc23c); border-color: var(--ink, #2d2a3a); } .ds-btn-primary::after { background: var(--primary-edge, #dd9a1e); } .ds-btn-primary:hover { filter: brightness(1.06); }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Secondary actions: cancel, sign out, pagination.",
+      "html": "<button class=\"ds-btn ds-btn-default\">ยกเลิก</button>",
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); color: var(--ink, #2d2a3a); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; background: var(--ink, #2d2a3a); z-index: -1; } .ds-btn:hover { background: var(--surface-alt, #fff1d6); } .ds-btn:active { transform: translateY(3px); }"
+    },
+    {
+      "name": "Danger Outline Button",
+      "kind": "button",
+      "refersTo": "button-danger-outline",
+      "description": "Delete actions only, in a two-click confirm sequence (label changes to \"ยืนยัน?\" on first click).",
+      "html": "<button class=\"ds-btn ds-btn-danger\">ลบ</button>",
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; z-index: -1; } .ds-btn-danger { color: var(--danger, #ef476f); border-color: var(--danger, #ef476f); } .ds-btn-danger::after { background: var(--danger-edge, #c62f52); } .ds-btn-danger:hover { background: var(--surface-alt, #fff1d6); } .ds-btn-danger:active { transform: translateY(3px); }"
+    },
+    {
+      "name": "Work Chip",
+      "kind": "chip",
+      "refersTo": "chip-work",
+      "description": "Marks a task or event as \"งาน\" (Work). Appears in list rows, kanban cards, and calendar chips.",
+      "html": "<span class=\"ds-chip ds-chip-work\">งาน</span>",
+      "css": ".ds-chip { display: inline-block; font-family: Prompt, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 4px; color: #fff; } .ds-chip-work { background: var(--work, #3a86ff); }"
+    },
+    {
+      "name": "Personal Chip",
+      "kind": "chip",
+      "refersTo": "chip-personal",
+      "description": "Marks a task or event as \"ส่วนตัว\" (Personal).",
+      "html": "<span class=\"ds-chip ds-chip-personal\">ส่วนตัว</span>",
+      "css": ".ds-chip { display: inline-block; font-family: Prompt, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 4px; color: #fff; } .ds-chip-personal { background: var(--personal, #ef5da8); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": null,
+      "description": "Task title, notes, and every other free-text field in the add-task form.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"ชื่องาน\">",
+      "css": ".ds-input { font-family: Prompt, sans-serif; font-size: 14px; padding: 8px 10px; border-radius: 2px; border: 2px solid var(--ink, #2d2a3a); background: var(--bg, #fdf5e6); color: var(--text, #2d2a3a); } .ds-input:focus-visible { outline: 3px solid var(--primary, #ffc23c); outline-offset: 2px; }"
+    },
+    {
+      "name": "View Tab (Navigation)",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "One of three view toggles (List / Kanban / Calendar) living inside a bordered pill container; pairs a line icon with Thai text.",
+      "html": "<button class=\"ds-tab ds-tab-active\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"4\" cy=\"6\" r=\"1\"/><line x1=\"8\" y1=\"6\" x2=\"20\" y2=\"6\"/><circle cx=\"4\" cy=\"12\" r=\"1\"/><line x1=\"8\" y1=\"12\" x2=\"20\" y2=\"12\"/><circle cx=\"4\" cy=\"18\" r=\"1\"/><line x1=\"8\" y1=\"18\" x2=\"20\" y2=\"18\"/></svg> รายการ</button>",
+      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; padding: 6px 13px; border-radius: 2px; color: var(--ink, #2d2a3a); cursor: pointer; } .ds-tab:hover { background: var(--surface-alt, #fff1d6); } .ds-tab-active { background: var(--primary, #ffc23c); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sticker Notebook",
+    "overview": "Life Dashboard is a single-user daily tool, not a marketing surface, so it commits to the opposite of a corporate SaaS dashboard: a warm cream page covered in chunky, hand-outlined stickers rather than a slick glass panel with ambient shadows. Every panel, button, and card is drawn with a solid 2px ink border and a flat fill, no blur, no soft elevation, nothing ambient. The one place depth appears is a button press: each button sits on a solid-color pedestal it physically pushes into on click, like pressing a real sticker down onto paper.\n\nThe palette is small and each color carries exactly one meaning: sky blue for work, bubblegum pink for personal, mint only for done, amber for the one action on screen, cherry only for delete. Icons are a small hand-drawn line set that replaced an earlier pass built on emoji.",
+    "keyCharacteristics": [
+      "Flat and shadowless — depth comes from borders and pedestals, never box-shadow.",
+      "2px solid ink borders and 0 border-radius everywhere except the 4px chip.",
+      "Chunky buttons that visibly press down 3px on click (transform-only).",
+      "A two-tone candy palette where every accent color has exactly one job.",
+      "Prompt typeface throughout.",
+      "A small authored 24x24 line-icon set; no emoji anywhere in the interface."
+    ],
+    "rules": [
+      {
+        "name": "The One Job Per Color Rule",
+        "body": "Every accent maps to exactly one meaning app-wide. If a color appears, it is communicating that specific thing, never decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Four-Size Rule",
+        "body": "Exactly four font sizes exist app-wide (11 / 14 / 18 / 22px). A new component reaches for one of these; it does not introduce a fifth.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "box-shadow does not appear anywhere in this system. Depth is drawn with borders and solid-color pedestals only.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep every border 2px solid Cocoa Ink (or the matching accent) at 0 radius.",
+      "Do reserve Minty Fresh for completion states only.",
+      "Do animate button presses with transform against a static pedestal.",
+      "Do draw new icons in the same 24x24, 2px-stroke, round-cap line style.",
+      "Do stay inside the four-size type scale."
+    ],
+    "donts": [
+      "Don't add box-shadow anywhere.",
+      "Don't use an emoji or other Unicode glyph as a stand-in icon.",
+      "Don't round a corner beyond the 4px chip exception.",
+      "Don't let amber, blue, pink, mint, or cherry mean anything other than their one assigned role."
+    ]
+  }
+}
