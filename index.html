@@ -134,6 +134,7 @@
     font: inherit; padding: 8px 10px; border-radius: var(--radius); border: 2px solid var(--ink); background: var(--bg); color: var(--text);
   }
   form#taskForm .full { grid-column: 1 / -1; }
+  form#taskForm .form-title { font-size: var(--fs-heading); font-weight: 700; }
   form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 10px; }
 
   .chip { display: inline-block; font-size: var(--fs-micro); font-weight: 700; padding: 3px 9px; border-radius: var(--radius-chip); color: var(--on-accent); }
@@ -169,7 +170,7 @@
   .kanban-col h3 { font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
   .kanban-col.status-done { border-top: 4px solid var(--success); }
   .kanban-col.status-done h3 { color: var(--success); }
-  .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; }
+  .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; cursor: pointer; }
   .task-card .title { font-size: var(--fs-body); font-weight: 600; margin-bottom: 5px; }
   .task-card .meta { font-size: var(--fs-micro); color: var(--muted); margin-bottom: 7px; font-weight: 500; }
   .task-card .row { display: flex; gap: 6px; align-items: center; }
@@ -183,7 +184,9 @@
   .list-item {
     display: flex; align-items: center; gap: 10px; background: var(--surface);
     border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px 12px; margin-bottom: 8px;
+    cursor: pointer; transition: background .1s ease;
   }
+  .list-item:hover { background: var(--surface-alt); }
   .list-item .title { flex: 1; font-size: var(--fs-body); font-weight: 500; }
   .list-item .title.done { text-decoration: line-through; color: var(--muted); }
   .list-item .due { font-size: var(--fs-micro); color: var(--muted); font-weight: 600; }
@@ -237,6 +240,7 @@
   <div id="statusMsg"></div>
 
   <form id="taskForm" hidden>
+    <strong id="formTitle" class="full form-title">เพิ่มงานใหม่</strong>
     <label class="full">ชื่องาน
       <input type="text" id="f_title" required maxlength="200">
     </label>
@@ -246,11 +250,12 @@
         <option value="personal">ส่วนตัว</option>
       </select>
     </label>
-    <label>สถานะเริ่มต้น
+    <label>สถานะ
       <select id="f_status">
         <option value="backlog">Backlog</option>
         <option value="todo" selected>Todo</option>
         <option value="doing">Doing</option>
+        <option value="done">Done</option>
       </select>
     </label>
     <label>วันที่กำหนด (ไม่บังคับ)
@@ -314,6 +319,7 @@ let tokenClient, accessToken = null, tokenResolve = null;
 let spreadsheetId = null, tasksSheetId = null;
 let workCalendarId = null, personalCalendarId = null;
 let tasks = [];
+let editingTaskId = null;
 let activeTab = 'list';
 let activeFilter = 'all';
 let calYear, calMonth;
@@ -494,6 +500,58 @@ async function addTask(data) {
   await loadTasks();
 }
 
+async function updateTask(task, data) {
+  let calendarEventId = task.calendarEventId || '';
+  const oldHasTime = !!(task.due && task.due.includes('T'));
+  const newHasTime = !!(data.due && data.due.includes('T'));
+  const oldCalId = (oldHasTime && calendarEventId) ? calendarIdForProject(task.project) : null;
+  const newCalId = calendarIdForProject(data.project);
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  async function deleteOldEvent() {
+    if (!calendarEventId || !oldCalId) return;
+    try {
+      await apiFetch(`${CAL_BASE}/calendars/${encodeURIComponent(oldCalId)}/events/${calendarEventId}`, { method: 'DELETE' });
+    } catch (e) { /* event may already be gone */ }
+  }
+
+  if (newHasTime) {
+    const start = new Date(data.due);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const eventBody = {
+      summary: data.title,
+      description: data.notes || '',
+      start: { dateTime: localIsoOffset(start), timeZone: tz },
+      end: { dateTime: localIsoOffset(end), timeZone: tz },
+    };
+    if (oldHasTime && calendarEventId && oldCalId === newCalId) {
+      await apiFetch(`${CAL_BASE}/calendars/${encodeURIComponent(newCalId)}/events/${calendarEventId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(eventBody),
+      });
+    } else {
+      await deleteOldEvent();
+      const created = await apiFetch(`${CAL_BASE}/calendars/${encodeURIComponent(newCalId)}/events`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(eventBody),
+      });
+      calendarEventId = created.id;
+    }
+  } else if (oldHasTime) {
+    await deleteOldEvent();
+    calendarEventId = '';
+  }
+
+  await apiFetch(`${SHEETS_BASE}/spreadsheets/${spreadsheetId}/values/Tasks!B${task.rowNum}:H${task.rowNum}?valueInputOption=RAW`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ values: [[data.title, data.project, data.status, data.due, data.priority, data.notes, calendarEventId]] }),
+  });
+  await loadTasks();
+}
+
 async function updateTaskStatus(task, newStatus) {
   task.status = newStatus;
   render();
@@ -513,6 +571,38 @@ function setButtonLoading(btn, loading, loadingText) {
     if (loading) { btn.dataset.origLabel = label.textContent; if (loadingText) label.textContent = loadingText; }
     else if (btn.dataset.origLabel) { label.textContent = btn.dataset.origLabel; delete btn.dataset.origLabel; }
   }
+}
+
+function setFormMode(mode) {
+  const isEdit = mode === 'edit';
+  document.getElementById('formTitle').textContent = isEdit ? 'แก้ไขงาน' : 'เพิ่มงานใหม่';
+  document.getElementById('taskSubmitBtn').querySelector('.btn-label').textContent = isEdit ? 'บันทึกการแก้ไข' : 'บันทึก';
+}
+
+function openEditForm(task) {
+  editingTaskId = task.id;
+  const form = document.getElementById('taskForm');
+  document.getElementById('f_title').value = task.title;
+  document.getElementById('f_project').value = task.project;
+  document.getElementById('f_status').value = task.status;
+  const parts = task.due ? task.due.split('T') : ['', ''];
+  document.getElementById('f_date').value = parts[0] || '';
+  document.getElementById('f_time').value = parts[1] ? parts[1].slice(0, 5) : '';
+  document.getElementById('f_priority').value = task.priority || '';
+  document.getElementById('f_notes').value = task.notes || '';
+  setFormMode('edit');
+  form.hidden = false;
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function bindCardClicks(root, selector) {
+  root.querySelectorAll(selector).forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('button, select, input')) return;
+      const t = tasks.find(x => x.id === el.dataset.id);
+      if (t) openEditForm(t);
+    });
+  });
 }
 
 const DELETE_CONFIRM_GUARD_MS = 400;
@@ -616,7 +706,7 @@ function renderList() {
   el.innerHTML = sections.map(([label, items, extraClass]) => {
     if (!items.length) return '';
     const rows = items.map(t => `
-      <div class="list-item">
+      <div class="list-item" data-id="${t.id}">
         <input type="checkbox" ${t.status === 'done' ? 'checked' : ''} data-id="${t.id}" class="done-toggle">
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
@@ -631,6 +721,7 @@ function renderList() {
     updateTaskStatus(t, e.target.checked ? 'done' : 'todo');
   }));
   bindDeleteButtons(el);
+  bindCardClicks(el, '.list-item');
 }
 
 function renderKanban() {
@@ -639,7 +730,7 @@ function renderKanban() {
   el.innerHTML = STATUSES.map(status => {
     const items = list.filter(t => t.status === status);
     const cards = items.map(t => `
-      <div class="task-card">
+      <div class="task-card" data-id="${t.id}">
         <div class="title">${escapeHtml(t.title)}</div>
         <div class="meta"><span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span> ${fmtDue(t.due)}</div>
         <div class="row">
@@ -657,6 +748,7 @@ function renderKanban() {
     updateTaskStatus(t, e.target.value);
   }));
   bindDeleteButtons(el);
+  bindCardClicks(el, '.task-card');
 }
 
 function renderCalendar() {
@@ -704,7 +796,7 @@ function showDayDetail(iso, items) {
     el.innerHTML = `<strong>${label}</strong><div class="empty-hint">ไม่มีงานวันนี้</div>`;
   } else {
     const rows = items.map(t => `
-      <div class="list-item">
+      <div class="list-item" data-id="${t.id}">
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
         <span class="due">${fmtDue(t.due)}</span>
@@ -712,6 +804,7 @@ function showDayDetail(iso, items) {
       </div>`).join('');
     el.innerHTML = `<strong>${label}</strong>${rows}`;
     bindDeleteButtons(el, renderCalendar);
+    bindCardClicks(el, '.list-item');
   }
   el.style.display = 'block';
 }
@@ -774,11 +867,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { activeFilter = b.dataset.filter; render(); }));
 
   document.getElementById('addTaskBtn').addEventListener('click', () => {
-    document.getElementById('taskForm').hidden = !document.getElementById('taskForm').hidden;
+    const form = document.getElementById('taskForm');
+    if (!form.hidden && !editingTaskId) {
+      form.hidden = true;
+      return;
+    }
+    editingTaskId = null;
+    form.reset();
+    setFormMode('add');
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   document.getElementById('cancelAddBtn').addEventListener('click', () => {
     document.getElementById('taskForm').hidden = true;
     document.getElementById('taskForm').reset();
+    editingTaskId = null;
+    setFormMode('add');
   });
   document.getElementById('taskForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -801,9 +905,16 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelBtn.disabled = true;
     setStatus('กำลังบันทึก...');
     try {
-      await addTask(data);
+      if (editingTaskId) {
+        const existing = tasks.find(x => x.id === editingTaskId);
+        await updateTask(existing, data);
+      } else {
+        await addTask(data);
+      }
       document.getElementById('taskForm').reset();
       document.getElementById('taskForm').hidden = true;
+      editingTaskId = null;
+      setFormMode('add');
       setStatus('');
       render();
     } catch (err) {
