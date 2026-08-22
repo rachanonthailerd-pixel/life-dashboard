@@ -1,202 +1,196 @@
 ---
 name: Life Dashboard
-description: A shop's tear-off wall calendar, rebuilt as a personal task ledger
+description: A strip of shop-front neon signage at night, rebuilt as a personal task board
 colors:
-  board-cream: "#f3e6c8"
-  leaf-paper: "#fbf3e1"
-  leaf-shade: "#eeddb4"
-  press-ink: "#2a1c10"
-  ledger-brown: "#6b5c46"
-  vermillion-ink: "#a3311a"
-  indigo-ink: "#1f4d5c"
-  crimson-stamp: "#7a1220"
-  gold-seal: "#7d5518"
-  gold-rule: "#c99a3d"
-  stamp-orange: "#c9722a"
-  stamp-orange-edge: "#9c5720"
-  crimson-edge: "#5c0e18"
-  paper-white: "#ffffff"
+  night-ground: "#0b0d16"
+  sign-panel: "#141726"
+  sign-panel-lit: "#1c2036"
+  neon-white: "#eef1fb"
+  unlit-gray: "#8b92ac"
+  frame-dim: "#2a2f45"
+  cyan-tube: "#2dd4f0"
+  magenta-tube: "#f43f8e"
+  crimson-tube: "#ff4d5e"
+  green-tube: "#39e67a"
+  amber-tube: "#ffcc33"
+  amber-tube-edge: "#cc9f1f"
+  crimson-tube-edge: "#cc3040"
 typography:
   display:
-    fontFamily: "Chonburi, Sarabun, serif"
+    fontFamily: "Kanit, Mitr, sans-serif"
     fontSize: "22px"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.2
     letterSpacing: "0.2px"
   heading:
-    fontFamily: "Chonburi, Sarabun, serif"
+    fontFamily: "Kanit, sans-serif"
     fontSize: "18px"
-    fontWeight: 400
+    fontWeight: 600
     lineHeight: 1.3
   body:
-    fontFamily: "Sarabun, -apple-system, 'Segoe UI', 'Noto Sans Thai', sans-serif"
+    fontFamily: "Mitr, -apple-system, 'Segoe UI', 'Noto Sans Thai', sans-serif"
     fontSize: "14px"
     fontWeight: 500
     lineHeight: 1.4
   label:
-    fontFamily: "Sarabun, sans-serif"
+    fontFamily: "Mitr, sans-serif"
     fontSize: "11px"
     fontWeight: 700
     letterSpacing: "0.5px"
 rounded:
-  none: "0px"
-  chip: "3px"
+  chip: "999px"
+  panel: "10px"
 components:
   button-primary:
-    backgroundColor: "{colors.stamp-orange}"
-    textColor: "{colors.press-ink}"
-    rounded: "{rounded.none}"
+    backgroundColor: "{colors.amber-tube}"
+    textColor: "{colors.night-ground}"
+    rounded: "{rounded.panel}"
     padding: "8px 13px"
   button-default:
-    backgroundColor: "{colors.leaf-paper}"
-    textColor: "{colors.press-ink}"
-    rounded: "{rounded.none}"
+    backgroundColor: "{colors.sign-panel}"
+    textColor: "{colors.neon-white}"
+    rounded: "{rounded.panel}"
     padding: "8px 13px"
   button-danger-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.crimson-stamp}"
-    rounded: "{rounded.none}"
+    textColor: "{colors.crimson-tube}"
+    rounded: "{rounded.panel}"
     padding: "8px 13px"
   chip-work:
-    backgroundColor: "{colors.vermillion-ink}"
-    textColor: "#ffffff"
+    backgroundColor: "transparent"
+    textColor: "{colors.cyan-tube}"
     rounded: "{rounded.chip}"
-    padding: "3px 9px"
+    padding: "3px 10px"
   chip-personal:
-    backgroundColor: "{colors.indigo-ink}"
-    textColor: "#ffffff"
+    backgroundColor: "transparent"
+    textColor: "{colors.magenta-tube}"
     rounded: "{rounded.chip}"
-    padding: "3px 9px"
+    padding: "3px 10px"
 ---
 
 # Design System: Life Dashboard
 
 ## Overview
 
-**Creative North Star: "The Shop Calendar"**
+**Creative North Star: "Neon Signage"**
 
-Life Dashboard replaced its earlier "Sticker Notebook" identity (flat pastel stickers, no shadows, pedestal-press buttons) with a different everyday object entirely: the printing-house wall calendar that hangs in homes and shopfronts across Thailand — a bold masthead above a tear-off date pad, a thin gold rule separating the two, printed in whatever two house inks the press had on hand. This is a solo daily-use tool, not a marketing surface, so the calendar-shop reference stays functional throughout: every task is a leaf on the pad, and finishing or deleting one visibly tears it free rather than just fading away.
+Life Dashboard's second full redesign replaced "The Shop Calendar" (a printing-house tear-off pad — warm cream paper, gold rule, house inks) with an entirely different material: a strip of shop-front neon tube signage seen at night. This is a solo daily-use tool, not a marketing surface, so the reference stays functional — every task is a sign, lit or unlit, and finishing or deleting one plays a brief power-off flicker before it's gone.
 
-The palette is two deep house inks (a vermillion for "งาน", an indigo for "ส่วนตัว") printed on warm cream paper, with a burnt-orange stamp ink reserved for the one action color and an antique-gold rule marking every heading. Chonburi — a Thai typeface modeled on hand-painted vintage shop-sign lettering — carries the masthead and section-scale headings only; Sarabun, a plain workhorse Thai sans, carries everything read densely (task titles, list rows, form fields), so density and legibility win over expression exactly where the daily task list needs to be scanned fast.
+The palette is a near-black night ground carrying two neon tube colors with one job each — electric cyan for "งาน", hot magenta for "ส่วนตัว" — plus an amber "OPEN sign" color for the one primary action and a green tube reserved for done/success. An early build pass leaned on blurred colored glow (text-shadow/box-shadow halos) to sell the neon read; the mechanical detector flagged every instance as the generic "AI-generated dark UI" cliché, and rather than merely dimming it, every glow was cut. The shipped system carries its signage identity entirely through saturated color, 1.5px outline, and shape (chips are colored text on a faintly tinted ground, never a solid fill; corners are gently rounded — a neon tube bends, it doesn't cut square) with zero blur anywhere. Kanit, a bold geometric Thai face with real signage character, carries the masthead and every heading; Mitr, a plain workhorse Thai sans, carries everything read densely.
 
 **Key Characteristics:**
-- A warm cream board under paper-white "leaves" — every task card, list row, and panel is a leaf on the pad, complete with a die-cut perforation strip at its top edge and a soft paper shadow (never a hard, zero-blur block shadow).
-- Two house inks with one job each — vermillion for งาน, indigo for ส่วนตัว — plus a burnt-orange stamp ink for the one action color and a gold rule under every heading.
-- Chonburi (vintage Thai shop-sign lettering) at display/heading scale only; Sarabun for every densely-read surface.
-- One signature motion: a leaf tears free — translate, rotate, fade — the moment a task is marked done or deleted. No other scattered hover/entrance effects.
-- Sharp-cut corners everywhere except the small chip label (3px), which reads as a printed sticker tag.
-- Today's date on the calendar wears a printed ring, not a filled highlight.
+- A near-black night ground under dark panel cards — no paper, no cream, no gold rule; this world is screen-native and nocturnal, committed to a single always-dark theme with no light-mode variant.
+- Two neon tube colors with one job each — cyan for งาน, magenta for ส่วนตัว — plus amber for the one primary action and green for done/success.
+- Zero blur-based glow anywhere. Identity is carried by saturated color, 1.5px outline, and shape alone — a deliberate correction after the detector caught the initial pass's colored halos as a known slop pattern.
+- Chips are colored text on a faintly tinted transparent ground, never a solid color fill with white text.
+- Moderate rounded corners (10px panels, fully pill-shaped chips) — a bent neon tube, not a cut-paper edge.
+- One signature motion: a task's sign flickers (rapid opacity oscillation) and powers off the moment it's marked done or deleted.
 
 ## Colors
 
-Warm cream paper carries the interface; the two house inks and the gold rule are the only saturated marks.
+A near-black night ground carries the interface; the neon tube colors are the only saturated marks, and they never blur.
 
 ### Primary
-- **Stamp Orange** (`#c9722a`, dark `#e2934f`): the one action color — sign in, add task, save, active tab/filter. Paired with **Press Ink** text (`#2a1c10`, constant in both themes as `--on-primary`) rather than white, since a mid-value orange never clears 4.5:1 against white text in either theme. Pedestal/border shade **Stamp Orange Edge** (`#9c5720`, dark `#b56f2e`).
+- **Amber Tube** (`#ffcc33`): the one action color — sign in, add task, save, active tab/filter. Paired with **Night Ground** text (`#0b0d16`, the `--on-primary` token) rather than white, since only a very dark ink clears 4.5:1 against this bright a yellow. Pedestal/border shade **Amber Tube Edge** (`#cc9f1f`).
 
 ### Secondary
-- **Vermillion Ink** (`#a3311a`, same in both themes): "งาน" (Work) — chips, calendar events. Used only as a solid fill under white text, never as text-on-page, so it doesn't need a lighter dark-mode variant.
-- **Indigo Ink** (`#1f4d5c`, same in both themes): "ส่วนตัว" (Personal) — chips, calendar events. Same reasoning as Vermillion Ink.
+- **Cyan Tube** (`#2dd4f0`): "งาน" (Work) — chip text/outline, calendar events. Rendered as colored text on a transparent, faintly tinted ground (`rgba(45,212,240,.08)`), never a solid fill.
+- **Magenta Tube** (`#f43f8e`): "ส่วนตัว" (Personal) — same treatment as Cyan Tube. Also the wordmark's own color, since the heart-shaped sign icon in the masthead is the one place a single accent gets to be decorative rather than semantic.
 
 ### Tertiary
-- **Gold Seal** (`#7d5518` light, `#d9a94a` dark): reserved for completion — the Done kanban column's top edge and heading, the "เสร็จแล้ว" list heading, and the high-priority badge. A deliberately different role from Gold Rule below: this one carries meaning ("finished"/"important"), the rule is purely decorative.
-- **Gold Rule** (`#c99a3d` light, `#d9a94a` dark): the thin divider under every `<h2>` and the calendar masthead, standing in for the "gold rule separating plate from pad" on a real printing-house calendar. Decorative only — never load it with semantic meaning the way Gold Seal carries.
-- **Crimson Stamp** (`#7a1220` light text/fill, `#e56a80` dark text): destructive actions and error copy. Because it plays both a text role (needs to brighten in dark mode to stay legible) and a fill role (the delete-confirm "ยืนยัน?" state, which needs to stay dark enough for white text in both themes), the fill role is pinned to a separate constant token, `--danger-fill: #7a1220`, never swapped by theme.
+- **Green Tube** (`#39e67a`): reserved for completion — the Done kanban column's border and heading, the "เสร็จแล้ว" list heading, and the high-priority badge.
+- **Crimson Tube** (`#ff4d5e`): destructive actions and error copy only. Its confirming-delete fill state (`--danger-fill`) is the same value — with only one theme to satisfy, danger doesn't need the light/dark split the prior two worlds required.
 
 ### Neutral
-- **Board Cream** (`#f3e6c8`, dark "Board in shadow" `#1a120a`): page background — deliberately kept warm brown in dark mode, never the cool blue-black slate a generic dark theme reaches for.
-- **Leaf Paper** (`#fbf3e1`, dark `#241a10`): card, panel, form, and input fill — the pad leaves sitting on the board.
-- **Leaf Shade** (`#eeddb4`, dark `#2f2313`): hover tint; also the kanban task-card's resting fill, so a card reads as already lifted off the column.
-- **Press Ink** (`#2a1c10`, dark "Cream ink" `#f0e3c8`): all body text and every structural border.
-- **Ledger Brown** (`#6b5c46` light, `#b8a684` dark): secondary/muted text (due dates, section meta, field hints).
+- **Night Ground** (`#0b0d16`): page background. The one and only ground value — this world never lightens for a "light mode," because neon signage is an inherently nocturnal material.
+- **Sign Panel** (`#141726`): card, panel, form, and input fill.
+- **Sign Panel Lit** (`#1c2036`): hover tint; the kanban task-card's resting fill.
+- **Neon White** (`#eef1fb`): all body text.
+- **Unlit Gray** (`#8b92ac`): secondary/muted text — due dates, section meta, field hints; reads as a sign that isn't switched on.
+- **Frame Dim** (`#2a2f45`): the neutral 1.5px border every panel, card, button, and input carries at rest — an unlit sign frame, never colored unless the element itself is semantically cyan/magenta/green/crimson/amber.
 
 ### Named Rules
-**The One Job Per Color Rule.** Every accent has exactly one meaning app-wide (vermillion = work, indigo = personal, gold seal = done/important, stamp orange = the primary action, crimson = danger). Gold Rule is the sole exception, by design: it is decoration, not signal, and must never be asked to carry meaning.
+**The One Job Per Color Rule.** Every neon color has exactly one meaning app-wide (cyan = work, magenta = personal, green = done/important, amber = the primary action, crimson = danger). The wordmark's magenta is the sole decorative exception, and it borrows Personal's exact hue rather than inventing a new one.
 
-**The 4.5:1 Floor.** Any color paired with text — the text sitting on the color, or the color being the text — clears at least 4.5:1 against its actual background, checked in both themes. `--on-primary` and `--danger-fill` exist specifically because a single theme-swapped token could not satisfy this for every role a color plays.
+**The 4.5:1 Floor.** Any color paired with text clears at least 4.5:1 against its actual background. `--on-primary` exists because white text fails against Amber Tube at every value this design uses.
 
-**The Warm-Dark Rule.** Dark mode stays in the same warm brown-black family as the light board; it never drifts to a cool blue-black "generic dark mode" ground.
+**The No-Glow Rule.** No `text-shadow` or colored `box-shadow` blur appears anywhere in this system. An early pass used both to sell the "neon" read and the mechanical detector flagged it as the generic AI-dark-UI cliché; the fix was to cut every instance, not thin them. Depth and identity come from saturated color, a 1.5px outline, and shape only.
 
 ## Typography
 
-**Display/Heading Font:** Chonburi (with Sarabun, serif fallback) — a Thai face modeled on hand-painted vintage shop-sign lettering.
-**Body/Label Font:** Sarabun (with system sans fallback) — a plain, dense-legible Thai workhorse face.
+**Display/Heading Font:** Kanit (with Mitr, sans-serif fallback) — a bold, geometric Thai face with real signage character.
+**Body/Label Font:** Mitr (with system sans fallback) — a plain, dense-legible Thai workhorse face.
 
-**Character:** Chonburi supplies the one expressive, "this is a printed shop calendar" voice; Sarabun stays out of the way everywhere the page is read densely. The pairing is deliberately asymmetric — expression at masthead scale, restraint everywhere else — because this is a daily Operate-mode tool, not a poster.
+**Character:** Kanit supplies the one expressive "this is a lit sign" voice at masthead and heading scale; Mitr stays out of the way everywhere the page is read densely. As in the prior world, expression is deliberately rationed to a small set of anchors so the daily task list stays scannable.
 
 ### Hierarchy
-- **Display** (Chonburi, 400, 22px, 1.2 line-height): the "Life Dashboard" wordmark only.
-- **Heading** (Chonburi, 400, 18px, 1.3 line-height): the add/edit form title and the calendar's month/year label — the two other places content earns a masthead-scale anchor.
-- **Body** (Sarabun, 500, 14px, 1.4 line-height): task titles, form fields, buttons, empty-state copy.
-- **Label** (Sarabun, 700, 11px, 0.5px tracking, uppercase for section headers): chips, meta text, kanban/list section headers, calendar-cell contents, priority badges.
+- **Display** (Kanit, 700, 22px, 1.2 line-height): the "Life Dashboard" wordmark only, set in Magenta Tube.
+- **Heading** (Kanit, 600, 18px, 1.3 line-height): the add/edit form title and the calendar's month/year label.
+- **Body** (Mitr, 500, 14px, 1.4 line-height): task titles, form fields, buttons, empty-state copy.
+- **Label** (Mitr, 700, 11px, 0.5px tracking, uppercase for section headers): chips, meta text, kanban/list section headers, calendar-cell contents, priority badges.
 
 ### Named Rules
-**The Masthead-Only Rule.** Chonburi appears only at Display or Heading scale (≥18px). It never appears on densely-repeated content (task titles, list rows, section headers) — a heavy display face at 11–14px repeated down a list fights legibility, which this Operate-mode tool cannot afford.
+**The Masthead-Only Rule.** Kanit appears only at Display or Heading scale (≥18px); it never appears on densely-repeated content, which this Operate-mode tool cannot afford to make less legible.
 
 ## Layout
 
-Unchanged from the incumbent structural system: a single centered column, max-width 960px, 16–18px outer padding; the toolbar wraps on narrow viewports; kanban is the one horizontally-scrolling exception (four columns, 200px minimum each, each column additionally capped at 65vh with its own internal vertical scroll beneath a fixed header). This redesign is a visual-world replacement, not a structural one — spacing rhythm and responsive behavior carry over from the prior system unchanged.
+Unchanged from the incumbent structural system across both prior worlds: a single centered column, max-width 960px, 16–18px outer padding; the toolbar wraps on narrow viewports; kanban is the one horizontally-scrolling exception (four columns, 200px minimum each, each additionally capped at 65vh with its own internal vertical scroll beneath a fixed header). This redesign, like the one before it, replaces the visual world only — spacing rhythm and responsive behavior carry over unchanged.
 
 ## Elevation & Depth
 
-Unlike the prior "Sticker Notebook" world (which banned shadows outright in favor of solid-color pedestals), leaves in this world carry a soft, blurred paper shadow — real paper stacked on a board has thickness, and a printed calendar pad's leaves visibly lift off the backing. Shadows are never hard-offset or zero-blur; they use `--shadow-sm` (cards, panels: `0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10)`, brightened for dark mode) and `--shadow-btn` (buttons at rest, removed entirely on `:active` to read as a stamp being pressed flat).
-
-### Shadow Vocabulary
-- **`--shadow-sm`**: every leaf — list items, task cards, kanban columns, the form, the day-detail panel.
-- **`--shadow-btn`**: buttons at rest; cleared on `:active` alongside a `scale(.97)` press and a brightness dip, so pressing a button reads as an ink stamp striking the page rather than a sticker lifting off a pedestal.
+Flat panels on a flat ground — no shadow, no blur, no ambient glow anywhere in the shipped system. Depth and hierarchy come entirely from the 1.5px Frame Dim border (neutral at rest, colored only when an element is semantically cyan/magenta/green/crimson/amber) and from a small, restrained neutral box-shadow (`--shadow-sm`, `--shadow-btn`) that lifts panels and buttons off the ground without any color in it.
 
 ### Named Rules
-**The Paper-Shadow Rule.** Shadows are always soft and offset (never a flat, zero-blur block shadow) and always attached to a leaf or a button — nothing in the system carries ambient decoration.
+**The No-Glow Rule.** See Colors. Restated here because it is fundamentally an elevation decision, not just a color one: this system draws depth with borders and neutral shadow only, the same discipline the prior "Shop Calendar" world applied to paper shadows, now applied to a material that is far more tempting to render with cliché colored blur.
 
 ## Shapes
 
-Sharp-cut corners everywhere (`--radius: 0px`) — panels, buttons, cards, inputs, and calendar cells stay straight-edged "cut paper" rectangles, consistent with the prior system's shape language but now meaning something different: a printed leaf torn along a straight guillotine cut, not a flat sticker. The one exception is the small chip label (`--radius-chip: 3px`), which reads as a printed tag rather than UI chrome. Every leaf additionally carries a `.leaf` perforation strip — a repeating row of small die-cut holes — along its top edge.
+Moderately rounded corners throughout (`--radius: 10px` for panels, buttons, cards, inputs, calendar cells) — a bent neon tube, not a cut-paper edge, and a deliberate departure from both prior worlds' sharp corners. The chip is the one shape taken further: fully pill-shaped (`--radius-chip: 999px`), reading as a closed loop of tube glass around its label.
 
 ## Components
 
 ### Buttons
-- **Shape:** 2px solid border, 0 radius, soft resting shadow (`--shadow-btn`).
-- **Primary:** Stamp Orange fill, Press Ink text (`--on-primary`, not white), Stamp Orange Edge border.
-- **Default:** Leaf Paper fill, Press Ink border/text.
-- **Danger-outline:** transparent fill, Crimson Stamp border and text; its "ยืนยัน?" confirming state fills with the constant `--danger-fill`, never the theme-swapped `--danger`.
-- **Press:** on `:active`, `transform: scale(.97)`, shadow cleared, brightness dipped — an ink-stamp impression, not a pedestal reveal.
-- **Tab/Filter toggles:** borderless, living inside a bordered pill container; active state is a flat Stamp Orange fill with Press Ink text.
+- **Shape:** 1.5px solid Frame Dim border, 10px radius, small neutral resting shadow.
+- **Primary:** Amber Tube fill, Night Ground text (`--on-primary`, not white), Amber Tube Edge border.
+- **Default:** Sign Panel fill, Neon White text, Frame Dim border.
+- **Danger-outline:** transparent fill, Crimson Tube border and text; its "ยืนยัน?" confirming state fills solid with Crimson Tube (`--danger-fill`).
+- **Press:** on `:active`, `transform: scale(.97)`, shadow cleared, brightness dipped.
+- **Tab/Filter toggles:** borderless, living inside a bordered pill container; active state is a flat Amber Tube fill with Night Ground text — no glow.
 
 ### Chips
-- **Style:** solid fill (Vermillion for Work, Indigo for Personal), white text, 3px radius, no border.
+- **Style:** colored text (Cyan for Work, Magenta for Personal) on a faintly tinted transparent ground, 1.5px matching-color border, fully pill-shaped (999px radius) — never a solid fill.
 
-### Cards / Containers ("Leaves")
-- **Corner style:** 0 radius throughout.
-- **Background:** Leaf Paper on the Board Cream page; Leaf Shade for a kanban task-card's resting fill.
-- **Shadow:** `--shadow-sm` (see Elevation & Depth).
-- **Border:** 2px solid Press Ink on every container.
-- **Perforation:** every leaf (`.leaf` class) carries a die-cut dot strip along its top edge via a `radial-gradient` pseudo-element.
-- **Hover:** flat background shift to Leaf Shade — never a transform or shadow change.
-- **Signature motion:** on delete-confirm or marking a task done, the leaf plays a single `tearAway` keyframe (translate + rotate + fade, ~320ms) before being removed — the app's one authored moment; nothing else in the system animates beyond hover/focus/press.
+### Cards / Containers
+- **Corner style:** 10px radius throughout.
+- **Background:** Sign Panel on the Night Ground page; Sign Panel Lit for a kanban task-card's resting fill and any hover state.
+- **Shadow:** small, neutral, uncolored (`--shadow-sm`) — see Elevation & Depth.
+- **Border:** 1.5px solid Frame Dim on every container at rest; colored only for a semantically-meaningful state (the Done kanban column's Green Tube border).
+- **Hover:** border brightens to Unlit Gray, background shifts to Sign Panel Lit — never a transform or colored glow.
+- **Signature motion:** on delete-confirm or marking a task done, the card plays a single `powerOff` keyframe (rapid opacity flicker, ~400ms) before being removed — the app's one authored moment.
 
 ### Inputs / Fields
-- **Style:** 2px solid Press Ink border, 0 radius, Board Cream fill.
-- **Focus:** themed 3px Stamp Orange `outline`, 2px offset, applied site-wide via `:focus-visible`.
+- **Style:** 1.5px solid Frame Dim border, 6px radius (`calc(var(--radius) - 4px)`), Night Ground fill.
+- **Focus:** themed 3px Amber Tube `outline`, 2px offset, applied site-wide via `:focus-visible`.
 - **Checkbox:** native control re-colored with `accent-color: var(--primary)`.
 
 ### Navigation (Tabs / Filters)
-Two pill-shaped, 2px-bordered containers holding borderless toggle buttons; active state is a flat Stamp Orange fill, each label pairing a line icon with its Thai text.
+Two pill-shaped, 1.5px-bordered containers holding borderless toggle buttons; active state is a flat Amber Tube fill, each label pairing a line icon with its Thai text.
 
 ### Calendar "Today" Ring
-The current day's number wears a 2px Stamp Orange ring (a printed date-stamp), rather than a filled or thick-bordered cell — the one place the calendar cell itself stays visually quiet so the ring reads clearly.
+The current day's number wears a 2px Amber Tube ring — a printed date-stamp reused from the prior world's grammar, now unlit (no glow) so it reads as an outline marker rather than a lit indicator.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep every leaf's border 2px solid Press Ink at 0 radius, with a soft `--shadow-sm` — the "leaf on a board" language holds everywhere except the 3px chip.
-- **Do** reserve Gold Seal for completion/importance only; keep Gold Rule purely decorative.
-- **Do** keep Chonburi at Display/Heading scale only (≥18px) — never on dense repeated content.
-- **Do** keep dark mode in the warm brown-black family; never drift to a cool blue-black ground.
-- **Do** play the `tearAway` motion on done/delete and nowhere else — it stays meaningful because it stays rare.
+- **Do** keep every panel's border 1.5px solid Frame Dim (or the matching semantic color) at 10px radius, with a small neutral shadow — never colored.
+- **Do** reserve Green Tube for completion/importance only.
+- **Do** keep Kanit at Display/Heading scale only (≥18px) — never on dense repeated content.
+- **Do** play the `powerOff` flicker on done/delete and nowhere else — it stays meaningful because it stays rare.
+- **Do** render chips as colored text on a faint tint, never a solid fill.
 
 ### Don't:
-- **Don't** use a hard-offset, zero-blur shadow anywhere — every shadow is soft and blurred.
-- **Don't** put white text on Stamp Orange (or any primary-fill surface) — use `--on-primary` (Press Ink); white fails contrast against this hue at every value the design uses.
-- **Don't** let Vermillion, Indigo, Gold Seal, Crimson, or Stamp Orange mean anything other than their one assigned role.
-- **Don't** round a corner beyond the 3px chip exception.
-- **Don't** use an emoji or Unicode glyph as a stand-in icon; the existing authored line-icon set carries over unchanged from the prior world.
+- **Don't** add a `text-shadow` or colored `box-shadow` blur anywhere in this system — it was tried, flagged by the detector as slop, and removed; it does not come back.
+- **Don't** put white text on Amber Tube (or any primary-fill surface) — use `--on-primary` (Night Ground); white fails contrast against this hue.
+- **Don't** let Cyan, Magenta, Green, Crimson, or Amber mean anything other than their one assigned role (the wordmark's Magenta is the sole named exception).
+- **Don't** ship a light-mode variant — this world is committed to always-dark.
+- **Don't** use an emoji or Unicode glyph as a stand-in icon; the existing authored line-icon set carries over unchanged from the prior worlds.
