@@ -15,12 +15,12 @@
     --surface: #fffdf8;
     --surface-alt: #fff1d6;
     --text: #2d2a3a;
-    --muted: #8a8398;
+    --muted: #6f6880;
     --ink: #2d2a3a;
-    --work: #3a86ff;
-    --personal: #ef5da8;
-    --danger: #ef476f;
-    --success: #2ec4b6;
+    --work: #1a6fe0;
+    --personal: #c93c85;
+    --danger: #d1264f;
+    --success: #0f7d72;
     --primary: #ffc23c;
     --primary-edge: #dd9a1e;
     --danger-edge: #c62f52;
@@ -40,8 +40,6 @@
       --text: #f5efe0;
       --muted: #b0a8c4;
       --ink: #f5efe0;
-      --work: #6fb2ff;
-      --personal: #ff8ecb;
       --danger: #ff7a9c;
       --success: #56e0cf;
       --primary: #ffd166;
@@ -60,7 +58,8 @@
     background: var(--bg);
     color: var(--text);
   }
-  h1, h3, strong, button, .tab-btn, .filter-btn { font-family: 'Prompt', sans-serif; }
+  h1, h2, h3, strong, button, .tab-btn, .filter-btn { font-family: 'Prompt', sans-serif; }
+  h2 { margin: 0; }
   svg.icon { flex: none; }
   svg.icon.spinner { animation: spin .7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -146,7 +145,7 @@
 
   /* Calendar */
   #calHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  #calHeader strong { font-size: var(--fs-heading); }
+  #calHeader h2 { font-size: var(--fs-heading); }
   #calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
   .cal-daylabel { text-align: center; font-size: var(--fs-micro); color: var(--muted); font-weight: 700; padding-bottom: 4px; }
   .cal-cell {
@@ -160,6 +159,7 @@
   .cal-cell .daynum { font-weight: 700; margin-bottom: 3px; }
   .cal-task-chip { display: block; font-size: var(--fs-micro); font-weight: 700; padding: 1px 4px; border-radius: var(--radius-chip); color: var(--on-accent); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #dayDetail { margin-top: 16px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 14px; display: none; }
+  #dayDetail h2 { font-size: var(--fs-heading); margin: 0 0 10px; }
 
   /* Kanban */
   #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 12px; overflow-x: auto; }
@@ -167,9 +167,9 @@
   #kanbanCols::-webkit-scrollbar-track { background: var(--surface-alt); }
   #kanbanCols::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 0; }
   .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 10px; min-height: 200px; }
-  .kanban-col h3 { font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .kanban-col h2 { font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
   .kanban-col.status-done { border-top: 4px solid var(--success); }
-  .kanban-col.status-done h3 { color: var(--success); }
+  .kanban-col.status-done h2 { color: var(--success); }
   .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; cursor: pointer; }
   .task-card .title { font-size: var(--fs-body); font-weight: 600; margin-bottom: 5px; }
   .task-card .meta { font-size: var(--fs-micro); color: var(--muted); margin-bottom: 7px; font-weight: 500; }
@@ -179,8 +179,8 @@
 
   /* List */
   .list-section { margin-bottom: 20px; }
-  .list-section h3 { font-size: var(--fs-micro); color: var(--muted); margin: 0 0 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
-  .list-section.section-done h3 { color: var(--success); }
+  .list-section h2 { font-size: var(--fs-micro); color: var(--muted); margin: 0 0 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .list-section.section-done h2 { color: var(--success); }
   .list-item {
     display: flex; align-items: center; gap: 10px; background: var(--surface);
     border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px 12px; margin-bottom: 8px;
@@ -240,7 +240,7 @@
   <div id="statusMsg"></div>
 
   <form id="taskForm" hidden>
-    <strong id="formTitle" class="full form-title">เพิ่มงานใหม่</strong>
+    <h2 id="formTitle" class="full form-title">เพิ่มงานใหม่</h2>
     <label class="full">ชื่องาน
       <input type="text" id="f_title" required maxlength="200">
     </label>
@@ -293,7 +293,7 @@
   <section id="calendarView" class="view">
     <div id="calHeader">
       <button id="calPrev">←</button>
-      <strong id="calLabel"></strong>
+      <h2 id="calLabel"></h2>
       <button id="calNext">→</button>
     </div>
     <div id="calGrid"></div>
@@ -713,7 +713,7 @@ function renderList() {
         <span class="due">${fmtDue(t.due)}</span>
         <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
       </div>`).join('');
-    return `<div class="list-section ${extraClass}"><h3>${label} (${items.length})</h3>${rows}</div>`;
+    return `<div class="list-section ${extraClass}"><h2>${label} (${items.length})</h2>${rows}</div>`;
   }).join('') || '<div class="empty-hint">ยังไม่มีงาน กด "+ เพิ่มงาน" เพื่อเริ่มต้น</div>';
 
   el.querySelectorAll('.done-toggle').forEach(cb => cb.addEventListener('change', (e) => {
@@ -740,7 +740,7 @@ function renderKanban() {
           <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
         </div>
       </div>`).join('');
-    return `<div class="kanban-col status-${status}"><h3>${STATUS_LABEL[status]} (${items.length})</h3>${cards}</div>`;
+    return `<div class="kanban-col status-${status}"><h2>${STATUS_LABEL[status]} (${items.length})</h2>${cards}</div>`;
   }).join('');
 
   el.querySelectorAll('.status-select').forEach(sel => sel.addEventListener('change', (e) => {
@@ -793,7 +793,7 @@ function showDayDetail(iso, items) {
   const d = new Date(iso + 'T00:00');
   const label = d.toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   if (!items.length) {
-    el.innerHTML = `<strong>${label}</strong><div class="empty-hint">ไม่มีงานวันนี้</div>`;
+    el.innerHTML = `<h2>${label}</h2><div class="empty-hint">ไม่มีงานวันนี้</div>`;
   } else {
     const rows = items.map(t => `
       <div class="list-item" data-id="${t.id}">
@@ -802,7 +802,7 @@ function showDayDetail(iso, items) {
         <span class="due">${fmtDue(t.due)}</span>
         <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
       </div>`).join('');
-    el.innerHTML = `<strong>${label}</strong>${rows}`;
+    el.innerHTML = `<h2>${label}</h2>${rows}`;
     bindDeleteButtons(el, renderCalendar);
     bindCardClicks(el, '.list-item');
   }

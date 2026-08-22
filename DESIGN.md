@@ -4,16 +4,19 @@ description: A chunky, shadowless calendar/kanban/list dashboard styled like pag
 colors:
   sunny-amber: "#ffc23c"
   sunny-amber-edge: "#dd9a1e"
-  sky-sherbet: "#3a86ff"
-  bubblegum-pink: "#ef5da8"
-  minty-fresh: "#2ec4b6"
-  cherry-fizz: "#ef476f"
+  sky-sherbet: "#1a6fe0"
+  bubblegum-pink: "#c93c85"
+  minty-fresh: "#0f7d72"
+  minty-fresh-dark: "#56e0cf"
+  cherry-fizz: "#d1264f"
+  cherry-fizz-dark: "#ff7a9c"
   cherry-fizz-edge: "#c62f52"
   vanilla-cream: "#fdf5e6"
   paper-white: "#fffdf8"
   butter-cream: "#fff1d6"
   cocoa-ink: "#2d2a3a"
-  dusty-grape: "#8a8398"
+  dusty-grape: "#6f6880"
+  dusty-grape-dark: "#b0a8c4"
   on-accent: "#ffffff"
 typography:
   display:
@@ -94,23 +97,25 @@ Warm cream "paper" neutrals carry the interface; saturated candy accents appear 
 - **Sunny Amber** (`#ffc23c`, dark `#ffd166`): the one action color — sign in, add task, save, and the active tab/filter highlight. Its pedestal (the solid edge beneath the button) is **Amber Caramel** (`#dd9a1e`, dark `#cc9a35`).
 
 ### Secondary
-- **Sky Sherbet** (`#3a86ff`, dark `#6fb2ff`): "งาน" (Work) — chips, calendar events tagged Work.
-- **Bubblegum Pink** (`#ef5da8`, dark `#ff8ecb`): "ส่วนตัว" (Personal) — chips, calendar events tagged Personal.
+- **Sky Sherbet** (`#1a6fe0`, same in both themes): "งาน" (Work) — chips, calendar events tagged Work. Deepened from an earlier, brighter blue after an audit found white chip text failed WCAG AA against it; because this color is only ever used as a solid fill under white text (never as text-on-page), it does not need a separate lighter dark-mode variant the way page text does.
+- **Bubblegum Pink** (`#c93c85`, same in both themes): "ส่วนตัว" (Personal) — chips, calendar events tagged Personal. Same audit-driven deepening and same-value-both-themes reasoning as Sky Sherbet.
 
 ### Tertiary
-- **Minty Fresh** (`#2ec4b6`, dark `#56e0cf`): reserved exclusively for completion — the Done kanban column's top edge and heading, and the "เสร็จแล้ว" list heading. It appears nowhere else, so it stays a genuine "finished" signal rather than decoration.
-- **Cherry Fizz** (`#ef476f`, dark `#ff7a9c`): destructive actions only (delete buttons, error text). Pedestal shade **Cherry Deep** (`#c62f52`, dark `#d65878`).
+- **Minty Fresh** (`#0f7d72` light, `#56e0cf` dark): reserved exclusively for completion — the Done kanban column's top edge and heading, and the "เสร็จแล้ว" list heading. It appears nowhere else, so it stays a genuine "finished" signal rather than decoration. The light-mode value was deepened from an earlier, brighter teal after an audit found it failed WCAG AA as heading text on the paper-white surface; the dark value already passed and is unchanged.
+- **Cherry Fizz** (`#d1264f` light, `#ff7a9c` dark): destructive actions only (delete buttons, error text). Pedestal shade **Cherry Deep** (`#c62f52`, dark `#d65878`). The light-mode value was deepened after an audit found the original failed WCAG AA as error/delete-button text on the paper-white surface; the dark value already passed and is unchanged.
 
 ### Neutral
 - **Vanilla Cream** (`#fdf5e6`, dark "Midnight Grape" `#211d36`): page background.
 - **Paper White** (`#fffdf8`, dark "Plum Velvet" `#2b2547`): card, panel, and input fill.
 - **Butter Cream** (`#fff1d6`, dark "Blackberry Tint" `#342c58`): hover tint; also the task-card fill inside a kanban column, so a card visibly lifts off its column without a shadow.
 - **Cocoa Ink** (`#2d2a3a`, dark "Cream Foam" `#f5efe0`): all body text and every structural border.
-- **Dusty Grape** (`#8a8398`, dark "Lilac Mist" `#b0a8c4`): secondary/muted text.
+- **Dusty Grape** (`#6f6880` light, `#b0a8c4` dark): secondary/muted text. The light-mode value was deepened after an audit found the original failed WCAG AA on the paper-white surface; the dark value already passed and is unchanged.
 - **On-Accent White** (`#ffffff`, same in both themes): text set directly on a saturated accent fill — chips and calendar task chips only.
 
 ### Named Rules
 **The One Job Per Color Rule.** Every accent maps to exactly one meaning app-wide (blue = work, pink = personal, mint = done, amber = the primary action, cherry = danger). If one of these colors appears on screen, it is communicating that specific thing — never decoration.
+
+**The 4.5:1 Floor.** Any color paired with text — whether the text sits on the color or the color is the text — must hit at least 4.5:1 contrast against its actual background, checked in both themes. A color that reads as "on-brand" but fails this is not an acceptable trade — deepen it and keep the hue family instead.
 
 ## Typography
 
