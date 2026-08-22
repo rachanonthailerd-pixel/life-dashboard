@@ -1,129 +1,121 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-22T00:00:00.000Z",
+  "generatedAt": "2026-08-23T00:00:00.000Z",
   "title": "Design System: Life Dashboard",
   "extensions": {
     "colorMeta": {
-      "sunny-amber": {
+      "stamp-orange": {
         "role": "primary",
-        "displayName": "Sunny Amber",
-        "canonical": "#ffc23c",
-        "tonalRamp": [
-          "#473206",
-          "#845e0b",
-          "#c18a10",
-          "#edaf26",
-          "#f2c663",
-          "#f7d997",
-          "#faeac6",
-          "#fdf6e7"
-        ]
+        "displayName": "Stamp Orange",
+        "canonical": "#c9722a",
+        "tonalRamp": ["#2c1608", "#4e270f", "#763a17", "#9e4d1f", "#c9722a", "#e0965a", "#eebd93", "#f8dfca"]
       },
-      "sky-sherbet": {
+      "vermillion-ink": {
         "role": "secondary",
-        "displayName": "Sky Sherbet",
-        "canonical": "#3a86ff",
-        "tonalRamp": [
-          "#061f47",
-          "#0b3a84",
-          "#1054c1",
-          "#2673ed",
-          "#639bf2",
-          "#97bcf7",
-          "#c6dafa",
-          "#e7f0fd"
-        ]
+        "displayName": "Vermillion Ink",
+        "canonical": "#a3311a",
+        "tonalRamp": ["#280c05", "#4c170a", "#752210", "#9e2d16", "#c4471f", "#dd7245", "#eba587", "#f7d2c4"]
       },
-      "bubblegum-pink": {
+      "indigo-ink": {
         "role": "secondary",
-        "displayName": "Bubblegum Pink",
-        "canonical": "#ef5da8",
-        "tonalRamp": [
-          "#410c27",
-          "#791649",
-          "#b1206b",
-          "#db388c",
-          "#e670ac",
-          "#eea0c8",
-          "#f6cbe1",
-          "#fbe9f2"
-        ]
+        "displayName": "Indigo Ink",
+        "canonical": "#1f4d5c",
+        "tonalRamp": ["#0a1a1f", "#13303a", "#1e4a58", "#296575", "#3f818f", "#6ba3ac", "#9fc4c8", "#d1e3e4"]
       },
-      "minty-fresh": {
+      "gold-seal": {
         "role": "tertiary",
-        "displayName": "Minty Fresh",
-        "canonical": "#2ec4b6",
-        "tonalRamp": [
-          "#123a37",
-          "#226d66",
-          "#31a095",
-          "#4cc8bc",
-          "#7fd7cf",
-          "#a9e4df",
-          "#d0f1ee",
-          "#ecf9f8"
-        ]
+        "displayName": "Gold Seal",
+        "canonical": "#7d5518",
+        "tonalRamp": ["#1c1206", "#33210a", "#4d3110", "#674216", "#82541d", "#a06c2d", "#c58f4c", "#e2bc80"]
       },
-      "cherry-fizz": {
+      "gold-rule": {
         "role": "tertiary",
-        "displayName": "Cherry Fizz",
-        "canonical": "#ef476f",
-        "tonalRamp": [
-          "#420b18",
-          "#7a142d",
-          "#b31e41",
-          "#dd365e",
-          "#e76f8b",
-          "#ef9fb2",
-          "#f6cbd5",
-          "#fbe9ed"
-        ]
+        "displayName": "Gold Rule",
+        "canonical": "#c99a3d",
+        "tonalRamp": ["#2c2109", "#4f3c11", "#785a1a", "#a17c25", "#c99a3d", "#dab767", "#e9d295", "#f5e9c8"]
       },
-      "cocoa-ink": {
+      "crimson-stamp": {
+        "role": "tertiary",
+        "displayName": "Crimson Stamp",
+        "canonical": "#7a1220",
+        "tonalRamp": ["#1c0509", "#340a10", "#521018", "#711621", "#941f2c", "#bd3a48", "#dd7480", "#f0bcc2"]
+      },
+      "board-cream": {
         "role": "neutral",
-        "displayName": "Cocoa Ink",
-        "canonical": "#2d2a3a",
-        "tonalRamp": [
-          "#23212b",
-          "#413e51",
-          "#605a77",
-          "#807a9a",
-          "#a49fb6",
-          "#c2bfcf",
-          "#dedce5",
-          "#f1f1f4"
-        ]
+        "displayName": "Board Cream",
+        "canonical": "#f3e6c8",
+        "tonalRamp": ["#2b2011", "#4f3d1f", "#7a5f2f", "#a68844", "#c7ac68", "#dcc794", "#ecdfbc", "#f8f1de"]
+      },
+      "leaf-paper": {
+        "role": "neutral",
+        "displayName": "Leaf Paper",
+        "canonical": "#fbf3e1",
+        "tonalRamp": ["#2f2a1c", "#564d33", "#82764c", "#ab9c6c", "#c9bc93", "#e0d6b9", "#f0e9d5", "#fbf6ec"]
+      },
+      "leaf-shade": {
+        "role": "neutral",
+        "displayName": "Leaf Shade",
+        "canonical": "#eeddb4",
+        "tonalRamp": ["#2c2312", "#4f3f21", "#7a6234", "#a3854c", "#c4a86e", "#dbc496", "#ecdcbc", "#f7ecda"]
+      },
+      "press-ink": {
+        "role": "neutral",
+        "displayName": "Press Ink",
+        "canonical": "#2a1c10",
+        "tonalRamp": ["#120b05", "#241609", "#3a230f", "#54341a", "#725029", "#94733f", "#ba9c62", "#dcc999"]
+      },
+      "ledger-brown": {
+        "role": "neutral",
+        "displayName": "Ledger Brown",
+        "canonical": "#6b5c46",
+        "tonalRamp": ["#16120d", "#2c251b", "#443a29", "#5f5237", "#7a6a47", "#988761", "#b7a887", "#dad2bd"]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The wordmark only."
+        "purpose": "The wordmark only, in Chonburi."
       },
       "heading": {
         "displayName": "Heading",
-        "purpose": "Calendar month/year label."
+        "purpose": "The add/edit form title and the calendar month/year label, in Chonburi."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Task titles, form fields, buttons, empty-state copy."
+        "purpose": "Task titles, form fields, buttons, empty-state copy, in Sarabun."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Chips, meta text, section headers, calendar-cell contents."
+        "purpose": "Chips, meta text, section headers, calendar-cell contents, priority badges, in Sarabun."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "shadow-sm",
+        "value": "0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10)",
+        "purpose": "Every leaf (list item, task card, kanban column, form, day-detail panel) — a soft paper lift off the board. Dark mode swaps to rgba(0,0,0,.45)/rgba(0,0,0,.35)."
+      },
+      {
+        "name": "shadow-btn",
+        "value": "0 2px 3px rgba(20,12,4,.22)",
+        "purpose": "Buttons at rest; cleared entirely on :active so a press reads as an ink stamp striking flat. Dark mode swaps to rgba(0,0,0,.5)."
+      }
+    ],
     "motion": [
       {
         "name": "press",
-        "value": "transform .08s ease",
-        "purpose": "Button press: translateY(3px) onto its static pedestal on :active."
+        "value": "transform .08s ease, box-shadow .08s ease, filter .08s ease",
+        "purpose": "Button press: scale(.97) + shadow cleared + brightness dip on :active — an ink-stamp impression."
       },
       {
         "name": "tint",
         "value": "background .1s ease",
-        "purpose": "Hover tint shift on cards, cells, and buttons."
+        "purpose": "Hover tint shift on leaves, calendar cells, and buttons."
+      },
+      {
+        "name": "tearAway",
+        "value": "translateY(26px) rotate(-8deg) scale(.96), opacity 0, .32s ease-in",
+        "purpose": "The one signature motion: a leaf visibly tears free of the pad when its task is marked done or deleted. Never used for any other transition."
       }
     ],
     "breakpoints": []
@@ -135,7 +127,7 @@
       "refersTo": "button-primary",
       "description": "The one action button on a screen: sign in, add task, save.",
       "html": "<button class=\"ds-btn ds-btn-primary\">+ เพิ่มงาน</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); color: var(--ink, #2d2a3a); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; background: var(--ink, #2d2a3a); z-index: -1; } .ds-btn:active { transform: translateY(3px); } .ds-btn-primary { background: var(--primary, #ffc23c); border-color: var(--ink, #2d2a3a); } .ds-btn-primary::after { background: var(--primary-edge, #dd9a1e); } .ds-btn-primary:hover { filter: brightness(1.06); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); color: var(--ink, #2a1c10); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); } .ds-btn-primary { background: var(--primary, #c9722a); color: var(--on-primary, #2a1c10); border-color: var(--primary-edge, #9c5720); } .ds-btn-primary:hover { filter: brightness(1.06); }"
     },
     {
       "name": "Default Button",
@@ -143,15 +135,15 @@
       "refersTo": "button-default",
       "description": "Secondary actions: cancel, sign out, pagination.",
       "html": "<button class=\"ds-btn ds-btn-default\">ยกเลิก</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); color: var(--ink, #2d2a3a); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; background: var(--ink, #2d2a3a); z-index: -1; } .ds-btn:hover { background: var(--surface-alt, #fff1d6); } .ds-btn:active { transform: translateY(3px); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); color: var(--ink, #2a1c10); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn:hover { background: var(--surface-alt, #eeddb4); } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
     },
     {
       "name": "Danger Outline Button",
       "kind": "button",
       "refersTo": "button-danger-outline",
-      "description": "Delete actions only, in a two-click confirm sequence (label changes to \"ยืนยัน?\" on first click).",
+      "description": "Delete actions only, in a two-click confirm sequence (label changes to \"ยืนยัน?\" on first click; confirming state fills with the theme-constant --danger-fill).",
       "html": "<button class=\"ds-btn ds-btn-danger\">ลบ</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2d2a3a); background: var(--surface, #fffdf8); border-radius: 0; padding: 8px 13px; cursor: pointer; transform: translateY(0); transition: transform .08s ease; } .ds-btn::after { content: \"\"; position: absolute; left: -2px; right: -2px; bottom: -5px; height: 5px; z-index: -1; } .ds-btn-danger { color: var(--danger, #ef476f); border-color: var(--danger, #ef476f); } .ds-btn-danger::after { background: var(--danger-edge, #c62f52); } .ds-btn-danger:hover { background: var(--surface-alt, #fff1d6); } .ds-btn-danger:active { transform: translateY(3px); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn-danger { color: var(--danger, #7a1220); border-color: var(--danger, #7a1220); } .ds-btn-danger:hover { background: var(--surface-alt, #eeddb4); } .ds-btn-danger.confirming { background: var(--danger-fill, #7a1220); border-color: var(--danger-fill, #7a1220); color: #fff; } .ds-btn-danger:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
     },
     {
       "name": "Work Chip",
@@ -159,7 +151,7 @@
       "refersTo": "chip-work",
       "description": "Marks a task or event as \"งาน\" (Work). Appears in list rows, kanban cards, and calendar chips.",
       "html": "<span class=\"ds-chip ds-chip-work\">งาน</span>",
-      "css": ".ds-chip { display: inline-block; font-family: Prompt, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 4px; color: #fff; } .ds-chip-work { background: var(--work, #3a86ff); }"
+      "css": ".ds-chip { display: inline-block; font-family: Sarabun, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 3px; color: #fff; } .ds-chip-work { background: var(--work, #a3311a); }"
     },
     {
       "name": "Personal Chip",
@@ -167,7 +159,7 @@
       "refersTo": "chip-personal",
       "description": "Marks a task or event as \"ส่วนตัว\" (Personal).",
       "html": "<span class=\"ds-chip ds-chip-personal\">ส่วนตัว</span>",
-      "css": ".ds-chip { display: inline-block; font-family: Prompt, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 4px; color: #fff; } .ds-chip-personal { background: var(--personal, #ef5da8); }"
+      "css": ".ds-chip { display: inline-block; font-family: Sarabun, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 3px; color: #fff; } .ds-chip-personal { background: var(--personal, #1f4d5c); }"
     },
     {
       "name": "Text Input",
@@ -175,7 +167,15 @@
       "refersTo": null,
       "description": "Task title, notes, and every other free-text field in the add-task form.",
       "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"ชื่องาน\">",
-      "css": ".ds-input { font-family: Prompt, sans-serif; font-size: 14px; padding: 8px 10px; border-radius: 2px; border: 2px solid var(--ink, #2d2a3a); background: var(--bg, #fdf5e6); color: var(--text, #2d2a3a); } .ds-input:focus-visible { outline: 3px solid var(--primary, #ffc23c); outline-offset: 2px; }"
+      "css": ".ds-input { font-family: Sarabun, sans-serif; font-size: 14px; padding: 8px 10px; border-radius: 0; border: 2px solid var(--ink, #2a1c10); background: var(--bg, #f3e6c8); color: var(--text, #2a1c10); } .ds-input:focus-visible { outline: 3px solid var(--primary, #c9722a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Leaf (signature card)",
+      "kind": "card",
+      "refersTo": null,
+      "description": "The shared material for every list row, task card, and panel: a perforated paper leaf on the board, with a soft shadow and a die-cut hole strip along its top edge. Plays the tearAway keyframe on delete or completion.",
+      "html": "<div class=\"ds-leaf\"><span class=\"ds-leaf-title\">ส่งรายงานประจำเดือน</span></div>",
+      "css": ".ds-leaf { position: relative; background: var(--surface, #fbf3e1); border: 2px solid var(--ink, #2a1c10); border-radius: 0; box-shadow: 0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10); padding: 9px 12px; } .ds-leaf::before { content: \"\"; position: absolute; left: 10px; right: 10px; top: -1px; height: 4px; background-image: radial-gradient(circle, var(--bg, #f3e6c8) 1.6px, transparent 1.7px); background-size: 9px 4px; background-repeat: repeat-x; background-position: top left; } .ds-leaf-title { font-family: Sarabun, sans-serif; font-size: 14px; font-weight: 500; color: var(--text, #2a1c10); } .ds-leaf.tearing { animation: dsTearAway .32s ease-in forwards; pointer-events: none; } @keyframes dsTearAway { 0% { transform: translateY(0) rotate(0); opacity: 1; } 30% { transform: translateY(-3px) rotate(-1deg); } 100% { transform: translateY(26px) rotate(-8deg) scale(.96); opacity: 0; } }"
     },
     {
       "name": "View Tab (Navigation)",
@@ -183,49 +183,60 @@
       "refersTo": null,
       "description": "One of three view toggles (List / Kanban / Calendar) living inside a bordered pill container; pairs a line icon with Thai text.",
       "html": "<button class=\"ds-tab ds-tab-active\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"4\" cy=\"6\" r=\"1\"/><line x1=\"8\" y1=\"6\" x2=\"20\" y2=\"6\"/><circle cx=\"4\" cy=\"12\" r=\"1\"/><line x1=\"8\" y1=\"12\" x2=\"20\" y2=\"12\"/><circle cx=\"4\" cy=\"18\" r=\"1\"/><line x1=\"8\" y1=\"18\" x2=\"20\" y2=\"18\"/></svg> รายการ</button>",
-      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; font-family: Prompt, sans-serif; font-weight: 600; font-size: 14px; padding: 6px 13px; border-radius: 2px; color: var(--ink, #2d2a3a); cursor: pointer; } .ds-tab:hover { background: var(--surface-alt, #fff1d6); } .ds-tab-active { background: var(--primary, #ffc23c); }"
+      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; padding: 6px 13px; border-radius: 0; color: var(--ink, #2a1c10); cursor: pointer; } .ds-tab:hover { background: var(--surface-alt, #eeddb4); } .ds-tab-active { background: var(--primary, #c9722a); color: var(--on-primary, #2a1c10); }"
     }
   ],
   "narrative": {
-    "northStar": "The Sticker Notebook",
-    "overview": "Life Dashboard is a single-user daily tool, not a marketing surface, so it commits to the opposite of a corporate SaaS dashboard: a warm cream page covered in chunky, hand-outlined stickers rather than a slick glass panel with ambient shadows. Every panel, button, and card is drawn with a solid 2px ink border and a flat fill, no blur, no soft elevation, nothing ambient. The one place depth appears is a button press: each button sits on a solid-color pedestal it physically pushes into on click, like pressing a real sticker down onto paper.\n\nThe palette is small and each color carries exactly one meaning: sky blue for work, bubblegum pink for personal, mint only for done, amber for the one action on screen, cherry only for delete. Icons are a small hand-drawn line set that replaced an earlier pass built on emoji.",
+    "northStar": "The Shop Calendar",
+    "overview": "Life Dashboard replaced its earlier \"Sticker Notebook\" identity (flat pastel stickers, no shadows, pedestal-press buttons) with a different everyday object entirely: the printing-house wall calendar that hangs in homes and shopfronts across Thailand — a bold masthead above a tear-off date pad, a thin gold rule separating the two, printed in whatever two house inks the press had on hand. This is a solo daily-use tool, not a marketing surface, so the calendar-shop reference stays functional throughout: every task is a leaf on the pad, and finishing or deleting one visibly tears it free rather than just fading away.\n\nThe palette is two deep house inks (a vermillion for \"งาน\", an indigo for \"ส่วนตัว\") printed on warm cream paper, with a burnt-orange stamp ink reserved for the one action color and an antique-gold rule marking every heading. Chonburi carries the masthead and section-scale headings only; Sarabun carries everything read densely, so density and legibility win over expression exactly where the daily task list needs to be scanned fast.",
     "keyCharacteristics": [
-      "Flat and shadowless — depth comes from borders and pedestals, never box-shadow.",
-      "2px solid ink borders and 0 border-radius everywhere except the 4px chip.",
-      "Chunky buttons that visibly press down 3px on click (transform-only).",
-      "A two-tone candy palette where every accent color has exactly one job.",
-      "Prompt typeface throughout.",
-      "A small authored 24x24 line-icon set; no emoji anywhere in the interface."
+      "A warm cream board under paper-white leaves — every task card, list row, and panel is a leaf on the pad, with a die-cut perforation strip and a soft paper shadow (never a hard, zero-blur block shadow).",
+      "Two house inks with one job each — vermillion for งาน, indigo for ส่วนตัว — plus a burnt-orange stamp ink for the one action color and a gold rule under every heading.",
+      "Chonburi (vintage Thai shop-sign lettering) at display/heading scale only; Sarabun for every densely-read surface.",
+      "One signature motion: a leaf tears free the moment a task is marked done or deleted. No other scattered hover/entrance effects.",
+      "Sharp-cut corners everywhere except the 3px chip label.",
+      "Today's date on the calendar wears a printed ring, not a filled highlight."
     ],
     "rules": [
       {
         "name": "The One Job Per Color Rule",
-        "body": "Every accent maps to exactly one meaning app-wide. If a color appears, it is communicating that specific thing, never decoration.",
+        "body": "Every accent has exactly one meaning app-wide (vermillion = work, indigo = personal, gold seal = done/important, stamp orange = the primary action, crimson = danger). Gold Rule is the sole exception, by design: it is decoration, not signal.",
         "section": "colors"
       },
       {
-        "name": "The Four-Size Rule",
-        "body": "Exactly four font sizes exist app-wide (11 / 14 / 18 / 22px). A new component reaches for one of these; it does not introduce a fifth.",
+        "name": "The 4.5:1 Floor",
+        "body": "Any color paired with text clears at least 4.5:1 against its actual background, checked in both themes. --on-primary and --danger-fill exist specifically because a single theme-swapped token could not satisfy this for every role a color plays.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm-Dark Rule",
+        "body": "Dark mode stays in the same warm brown-black family as the light board; it never drifts to a cool blue-black generic-dark-mode ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The Masthead-Only Rule",
+        "body": "Chonburi appears only at Display or Heading scale (>=18px). It never appears on densely-repeated content, which this Operate-mode tool cannot afford to make less legible.",
         "section": "typography"
       },
       {
-        "name": "The No-Shadow Rule",
-        "body": "box-shadow does not appear anywhere in this system. Depth is drawn with borders and solid-color pedestals only.",
+        "name": "The Paper-Shadow Rule",
+        "body": "Shadows are always soft and offset (never a flat, zero-blur block shadow) and always attached to a leaf or a button.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do keep every border 2px solid Cocoa Ink (or the matching accent) at 0 radius.",
-      "Do reserve Minty Fresh for completion states only.",
-      "Do animate button presses with transform against a static pedestal.",
-      "Do draw new icons in the same 24x24, 2px-stroke, round-cap line style.",
-      "Do stay inside the four-size type scale."
+      "Do keep every leaf's border 2px solid Press Ink at 0 radius, with a soft shadow-sm.",
+      "Do reserve Gold Seal for completion/importance only; keep Gold Rule purely decorative.",
+      "Do keep Chonburi at Display/Heading scale only (>=18px).",
+      "Do keep dark mode in the warm brown-black family; never drift to a cool blue-black ground.",
+      "Do play the tearAway motion on done/delete and nowhere else."
     ],
     "donts": [
-      "Don't add box-shadow anywhere.",
-      "Don't use an emoji or other Unicode glyph as a stand-in icon.",
-      "Don't round a corner beyond the 4px chip exception.",
-      "Don't let amber, blue, pink, mint, or cherry mean anything other than their one assigned role."
+      "Don't use a hard-offset, zero-blur shadow anywhere.",
+      "Don't put white text on Stamp Orange (or any primary-fill surface) — use --on-primary.",
+      "Don't let Vermillion, Indigo, Gold Seal, Crimson, or Stamp Orange mean anything other than their one assigned role.",
+      "Don't round a corner beyond the 3px chip exception.",
+      "Don't use an emoji or Unicode glyph as a stand-in icon."
     ]
   }
 }
