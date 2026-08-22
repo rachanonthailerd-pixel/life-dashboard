@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-color",
+        "value": "#ffffff",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-22T19:42:52.125Z",
+        "reason": "Claude: Google Calendar API foregroundColor param (calendar list swatch text), not a UI design token"
+      }
+    ]
+  }
+}
