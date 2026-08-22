@@ -4,65 +4,81 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Life Dashboard</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23ffc23c'/%3E%3Cpath d='M9 4h6l4 4v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z' fill='none' stroke='%232d2a3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 4v4a1 1 0 0 0 1 1h4' fill='none' stroke='%232d2a3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23f3e6c8'/%3E%3Cpath d='M4 5h16v13l-2-2-2 2-2-2-2 2-2-2-2 2-2-2-2 2V5z' fill='none' stroke='%232a1c10' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='4' r='1.4' fill='%232a1c10'/%3E%3Cline x1='8' y1='9' x2='16' y2='9' stroke='%23c99a3d' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" defer></script>
 <style>
   :root {
-    --bg: #fdf5e6;
-    --surface: #fffdf8;
-    --surface-alt: #fff1d6;
-    --text: #2d2a3a;
-    --muted: #6f6880;
-    --ink: #2d2a3a;
-    --work: #1a6fe0;
-    --personal: #c93c85;
-    --danger: #d1264f;
-    --success: #0f7d72;
-    --primary: #ffc23c;
-    --primary-edge: #dd9a1e;
-    --danger-edge: #c62f52;
+    --bg: #f3e6c8;
+    --surface: #fbf3e1;
+    --surface-alt: #eeddb4;
+    --text: #2a1c10;
+    --muted: #6b5c46;
+    --ink: #2a1c10;
+    --work: #a3311a;
+    --personal: #1f4d5c;
+    --danger: #7a1220;
+    --danger-fill: #7a1220;
+    --success: #7d5518;
+    --gold-rule: #c99a3d;
+    --primary: #c9722a;
+    --primary-edge: #9c5720;
+    --danger-edge: #5c0e18;
     --radius: 0px;
-    --radius-chip: 4px;
+    --radius-chip: 3px;
     --on-accent: #ffffff;
+    --on-primary: #2a1c10;
     --fs-micro: 11px;
     --fs-body: 14px;
     --fs-heading: 18px;
     --fs-display: 22px;
+    --shadow-sm: 0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10);
+    --shadow-btn: 0 2px 3px rgba(20,12,4,.22);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #211d36;
-      --surface: #2b2547;
-      --surface-alt: #342c58;
-      --text: #f5efe0;
-      --muted: #b0a8c4;
-      --ink: #f5efe0;
-      --danger: #ff7a9c;
-      --success: #56e0cf;
-      --primary: #ffd166;
-      --primary-edge: #cc9a35;
-      --danger-edge: #d65878;
+      --bg: #1a120a;
+      --surface: #241a10;
+      --surface-alt: #2f2313;
+      --text: #f0e3c8;
+      --muted: #b8a684;
+      --ink: #f0e3c8;
+      --danger: #e56a80;
+      --success: #d9a94a;
+      --gold-rule: #d9a94a;
+      --primary: #e2934f;
+      --primary-edge: #b56f2e;
+      --danger-edge: #a83b52;
+      --shadow-sm: 0 2px 6px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.35);
+      --shadow-btn: 0 2px 3px rgba(0,0,0,.5);
     }
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  ::selection { background: var(--primary); color: var(--ink); }
+  ::selection { background: var(--primary); color: var(--on-primary); }
   :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
   body {
     margin: 0;
-    font-family: 'Prompt', -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
+    font-family: 'Sarabun', -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
     font-size: var(--fs-body);
     background: var(--bg);
     color: var(--text);
   }
-  h1, h2, h3, strong, button, .tab-btn, .filter-btn { font-family: 'Prompt', sans-serif; }
-  h2 { margin: 0; }
+  h1, h2, h3, strong, .tab-btn, .filter-btn { font-family: 'Sarabun', sans-serif; }
+  button { font-family: 'Sarabun', sans-serif; }
+  .masthead-face { font-family: 'Chonburi', 'Sarabun', serif; font-weight: 400; }
+  h2 { margin: 0; padding-bottom: 6px; border-bottom: 2px solid var(--gold-rule); }
   svg.icon { flex: none; }
   svg.icon.spinner { animation: spin .7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes tearAway {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    30% { transform: translateY(-3px) rotate(-1deg); }
+    100% { transform: translateY(26px) rotate(-8deg) scale(.96); opacity: 0; }
+  }
+  .tearing { animation: tearAway .32s ease-in forwards; pointer-events: none; }
   header {
     display: flex;
     align-items: center;
@@ -70,11 +86,12 @@
     padding: 14px 18px;
     background: var(--surface);
     border-bottom: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
     z-index: 20;
   }
-  header h1 { display: flex; align-items: center; gap: 9px; font-size: var(--fs-display); margin: 0; font-weight: 700; letter-spacing: .2px; }
+  header h1 { display: flex; align-items: center; gap: 9px; font-size: var(--fs-display); margin: 0; font-weight: 400; letter-spacing: .2px; }
   button {
     font: inherit;
     font-weight: 600;
@@ -88,44 +105,32 @@
     border-radius: var(--radius);
     padding: 8px 13px;
     cursor: pointer;
-    transform: translateY(0);
-    transition: transform .08s ease;
-  }
-  button::after {
-    content: "";
-    position: absolute;
-    left: -2px;
-    right: -2px;
-    bottom: -5px;
-    height: 5px;
-    background: var(--ink);
-    z-index: -1;
+    box-shadow: var(--shadow-btn);
+    transform: scale(1);
+    transition: transform .08s ease, box-shadow .08s ease, filter .08s ease;
   }
   button:hover { background: var(--surface-alt); }
-  button:active { transform: translateY(3px); }
-  button.primary { background: var(--primary); color: var(--ink); border-color: var(--ink); }
-  button.primary::after { background: var(--primary-edge); }
-  button.primary:hover { background: var(--primary); filter: brightness(1.06); }
+  button:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }
+  button.primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary-edge); }
+  button.primary:hover { filter: brightness(1.06); }
   button.danger-outline { color: var(--danger); border-color: var(--danger); }
-  button.danger-outline::after { background: var(--danger-edge); }
   button.danger-outline:hover { background: var(--surface-alt); }
-  button.danger-outline.confirming { background: var(--danger); color: var(--on-accent); }
-  button.danger-outline.confirming:hover { background: var(--danger); filter: brightness(1.08); }
+  button.danger-outline.confirming { background: var(--danger-fill); border-color: var(--danger-fill); color: var(--on-accent); }
+  button.danger-outline.confirming:hover { filter: brightness(1.1); }
   button:disabled { opacity: .5; cursor: default; transform: none; }
   #userArea { display: flex; align-items: center; gap: 8px; font-size: var(--fs-micro); color: var(--muted); font-weight: 500; }
   main { max-width: 960px; margin: 0 auto; padding: 18px 16px 60px; }
   .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
   .tabs, .filters { display: flex; gap: 4px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 4px; }
-  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; padding: 6px 13px; border-radius: var(--radius); font-weight: 600; }
-  .tab-btn::after, .filter-btn::after { display: none; }
+  .tab-btn, .filter-btn { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; box-shadow: none; padding: 6px 13px; border-radius: var(--radius); font-weight: 600; }
   .tab-btn:hover, .filter-btn:hover { transform: none; background: var(--surface-alt); }
-  .tab-btn.active, .filter-btn.active { background: var(--primary); color: var(--ink); }
+  .tab-btn.active, .filter-btn.active { background: var(--primary); color: var(--on-primary); }
   .toolbar .spacer { flex: 1; }
   #statusMsg { font-size: var(--fs-micro); color: var(--muted); min-height: 18px; margin-bottom: 8px; font-weight: 500; }
   #statusMsg.error { color: var(--danger); font-weight: 600; }
-  #reconnectBar { display: none; background: var(--primary); color: var(--ink); border: 2px solid var(--ink); padding: 10px 14px; border-radius: var(--radius); margin-bottom: 14px; align-items: center; gap: 10px; font-weight: 600; }
+  #reconnectBar { display: none; background: var(--primary); color: var(--on-primary); border: 2px solid var(--primary-edge); padding: 10px 14px; border-radius: var(--radius); margin-bottom: 14px; align-items: center; gap: 10px; font-weight: 600; box-shadow: var(--shadow-sm); }
   form#taskForm {
-    background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
+    background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-sm);
     padding: 16px; margin-bottom: 16px; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr);
   }
   form#taskForm label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-micro); color: var(--muted); font-weight: 600; }
@@ -133,7 +138,7 @@
     font: inherit; padding: 8px 10px; border-radius: var(--radius); border: 2px solid var(--ink); background: var(--bg); color: var(--text);
   }
   form#taskForm .full { grid-column: 1 / -1; }
-  form#taskForm .form-title { font-size: var(--fs-heading); font-weight: 700; }
+  form#taskForm .form-title { font-size: var(--fs-heading); font-weight: 400; }
   .field-hint { font-size: var(--fs-micro); color: var(--muted); font-weight: 500; text-align: right; }
   form#taskForm .actions { grid-column: 1 / -1; display: flex; gap: 10px; }
 
@@ -143,43 +148,56 @@
 
   .priority-badge { display: inline-flex; align-items: center; gap: 3px; font-size: var(--fs-micro); font-weight: 600; color: var(--muted); }
   .priority-badge.priority-medium { font-weight: 700; }
-  .priority-badge.priority-high { color: var(--ink); font-weight: 700; }
+  .priority-badge.priority-high { color: var(--success); font-weight: 700; }
 
   .view { display: none; }
   .view.active { display: block; }
 
+  /* Leaf: the tear-off pad material shared by every task row/card */
+  .leaf { position: relative; }
+  .leaf::before {
+    content: "";
+    position: absolute; left: 10px; right: 10px; top: -1px; height: 4px;
+    background-image: radial-gradient(circle, var(--bg) 1.6px, transparent 1.7px);
+    background-size: 9px 4px; background-repeat: repeat-x; background-position: top left;
+  }
+
   /* Calendar */
   #calHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  #calHeader h2 { font-size: var(--fs-heading); }
+  #calHeader h2 { font-size: var(--fs-heading); font-weight: 400; }
   #calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
   .cal-daylabel { text-align: center; font-size: var(--fs-micro); color: var(--muted); font-weight: 700; padding-bottom: 4px; }
   .cal-cell {
+    position: relative;
     background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
     min-height: 78px; padding: 5px; font-size: var(--fs-micro); cursor: pointer; overflow: hidden;
     transition: background .1s ease;
   }
   .cal-cell:hover { background: var(--surface-alt); }
   .cal-cell.muted { opacity: .35; }
-  .cal-cell.today { background: var(--surface-alt); border-color: var(--primary); border-width: 3px; }
+  .cal-cell.today .daynum {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%;
+  }
   .cal-cell .daynum { font-weight: 700; margin-bottom: 3px; }
   .cal-task-chip { display: block; font-size: var(--fs-micro); font-weight: 700; padding: 1px 4px; border-radius: var(--radius-chip); color: var(--on-accent); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #dayDetail { margin-top: 16px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 14px; display: none; }
-  #dayDetail h2 { font-size: var(--fs-heading); margin: 0 0 10px; }
+  #dayDetail { margin-top: 16px; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 14px; display: none; }
+  #dayDetail h2 { font-size: var(--fs-heading); font-weight: 400; margin: 0 0 10px; }
 
   /* Kanban */
   #kanbanCols { display: grid; grid-template-columns: repeat(4, minmax(200px,1fr)); gap: 12px; overflow-x: auto; }
   #kanbanCols::-webkit-scrollbar { height: 10px; }
   #kanbanCols::-webkit-scrollbar-track { background: var(--surface-alt); }
   #kanbanCols::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 0; }
-  .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 10px; min-height: 200px; max-height: 65vh; display: flex; flex-direction: column; }
-  .kanban-col h2 { flex: none; font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 10px; min-height: 200px; max-height: 65vh; display: flex; flex-direction: column; }
+  .kanban-col h2 { flex: none; font-size: var(--fs-micro); margin: 2px 4px 10px; padding-bottom: 6px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
   .kanban-col-cards { overflow-y: auto; flex: 1 1 auto; margin: 0 -10px; padding: 0 10px; }
   .kanban-col-cards::-webkit-scrollbar { width: 8px; }
   .kanban-col-cards::-webkit-scrollbar-track { background: var(--surface-alt); }
   .kanban-col-cards::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 0; }
   .kanban-col.status-done { border-top: 4px solid var(--success); }
-  .kanban-col.status-done h2 { color: var(--success); }
-  .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; cursor: pointer; }
+  .kanban-col.status-done h2 { color: var(--success); border-color: var(--success); }
+  .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 9px; margin-bottom: 9px; cursor: pointer; }
   .task-card .title { font-size: var(--fs-body); font-weight: 600; margin-bottom: 5px; overflow-wrap: break-word; word-break: break-word; }
   .task-card .meta { font-size: var(--fs-micro); color: var(--muted); margin-bottom: 7px; font-weight: 500; }
   .task-card .row { display: flex; gap: 6px; align-items: center; }
@@ -188,11 +206,11 @@
 
   /* List */
   .list-section { margin-bottom: 20px; }
-  .list-section h2 { font-size: var(--fs-micro); color: var(--muted); margin: 0 0 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
-  .list-section.section-done h2 { color: var(--success); }
+  .list-section h2 { font-size: var(--fs-micro); color: var(--muted); margin: 0 0 9px; padding-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .list-section.section-done h2 { color: var(--success); border-color: var(--success); }
   .list-item {
     display: flex; align-items: center; gap: 10px; background: var(--surface);
-    border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px 12px; margin-bottom: 8px;
+    border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 9px 12px; margin-bottom: 8px;
     cursor: pointer; transition: background .1s ease;
   }
   .list-item:hover { background: var(--surface-alt); }
@@ -208,9 +226,17 @@
 </style>
 </head>
 <body>
+<!--
+THESIS: A personal task ledger reads like a shop's tear-off wall calendar, not a SaaS dashboard — every task is a leaf on a pad, torn free the moment it's done, refusing the flat sticker-and-pedestal look this project shipped with before.
+OWN-WORLD: warm cream board (#f3e6c8) under paper-white leaves (#fbf3e1); two house inks — deep vermillion for "งาน", deep indigo for "ส่วนตัว" — plus a burnt-orange stamp ink for the one action color and an antique-gold rule under every heading; Chonburi (Thai vintage shop-sign lettering) for the masthead and section titles only, Sarabun for everything read densely; leaves carry a soft paper shadow and a die-cut perforation strip, sharp-cut corners throughout.
+STORY: the owner opens the pad to see what's overdue, today, and this week; today's date wears a printed ring; a task torn free (done, or deleted) visibly rips off the pad before it's gone.
+FIRST VIEWPORT: sticky masthead with the torn-leaf wordmark, a bordered tab/filter pill row beneath, then the active pad (list/kanban/calendar) as bordered cream leaves on the warm board, each leaf perforated at its top edge.
+FORM: direction "an advertising wall calendar from a printing house, a painted figure filling the upper sheet and a tear-off date pad below" (vernacular-ephemera-calendar-pinup-pad), won as a challenger against assigned grounded candidate 3 (recipe index-card box) on audience identification and product clarity; seed key f25ea84c.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
 
 <header>
-  <h1><svg class="icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5L14.5 3z"/><path d="M14 3v5.5a1 1 0 0 0 1 1H19.5"/></svg> Life Dashboard</h1>
+  <h1><svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v13l-2-2-2 2-2-2-2 2-2-2-2 2-2-2-2 2V5z"/><circle cx="12" cy="4" r="1.3" fill="currentColor" stroke="none"/><line x1="8" y1="9" x2="16" y2="9"/></svg> <span class="masthead-face">Life Dashboard</span></h1>
   <div id="authArea">
     <button id="signInBtn" class="primary">เข้าสู่ระบบด้วย Google</button>
     <div id="userArea" hidden>
@@ -249,7 +275,7 @@
   <div id="statusMsg"></div>
 
   <form id="taskForm" hidden>
-    <h2 id="formTitle" class="full form-title">เพิ่มงานใหม่</h2>
+    <h2 id="formTitle" class="full form-title masthead-face">เพิ่มงานใหม่</h2>
     <label class="full">ชื่องาน
       <input type="text" id="f_title" required maxlength="200">
       <span id="titleCounter" class="field-hint" hidden></span>
@@ -303,7 +329,7 @@
   <section id="calendarView" class="view">
     <div id="calHeader">
       <button id="calPrev">←</button>
-      <h2 id="calLabel"></h2>
+      <h2 id="calLabel" class="masthead-face"></h2>
       <button id="calNext">→</button>
     </div>
     <div id="calGrid"></div>
@@ -642,7 +668,10 @@ function bindDeleteButtons(root, afterDelete) {
       if (btn.dataset.confirming) {
         if (Date.now() - Number(btn.dataset.armedAt) < DELETE_CONFIRM_GUARD_MS) return;
         const t = tasks.find(x => x.id === btn.dataset.id);
-        deleteTask(t).then(() => { if (afterDelete) afterDelete(); });
+        const leaf = btn.closest('.leaf');
+        const runDelete = () => deleteTask(t).then(() => { if (afterDelete) afterDelete(); });
+        if (leaf) { leaf.classList.add('tearing'); setTimeout(runDelete, 300); }
+        else runDelete();
         return;
       }
       btn.dataset.confirming = '1';
@@ -738,7 +767,7 @@ function renderList() {
   el.innerHTML = sections.map(([label, items, extraClass]) => {
     if (!items.length) return '';
     const rows = items.map(t => `
-      <div class="list-item" data-id="${t.id}">
+      <div class="list-item leaf" data-id="${t.id}">
         <input type="checkbox" ${t.status === 'done' ? 'checked' : ''} data-id="${t.id}" class="done-toggle">
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
@@ -751,7 +780,13 @@ function renderList() {
 
   el.querySelectorAll('.done-toggle').forEach(cb => cb.addEventListener('change', (e) => {
     const t = tasks.find(x => x.id === e.target.dataset.id);
-    updateTaskStatus(t, e.target.checked ? 'done' : 'todo');
+    if (e.target.checked) {
+      const leaf = e.target.closest('.leaf');
+      if (leaf) { leaf.classList.add('tearing'); setTimeout(() => updateTaskStatus(t, 'done'), 300); }
+      else updateTaskStatus(t, 'done');
+    } else {
+      updateTaskStatus(t, 'todo');
+    }
   }));
   bindDeleteButtons(el);
   bindCardClicks(el, '.list-item');
@@ -763,7 +798,7 @@ function renderKanban() {
   el.innerHTML = STATUSES.map(status => {
     const items = list.filter(t => t.status === status);
     const cards = items.map(t => `
-      <div class="task-card" data-id="${t.id}">
+      <div class="task-card leaf" data-id="${t.id}">
         <div class="title">${escapeHtml(t.title)}</div>
         <div class="meta"><span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span> ${fmtDue(t.due)} ${priorityBadge(t)}</div>
         <div class="row">
@@ -829,7 +864,7 @@ function showDayDetail(iso, items) {
     el.innerHTML = `<h2>${label}</h2><div class="empty-hint">ไม่มีงานวันนี้</div>`;
   } else {
     const rows = items.map(t => `
-      <div class="list-item" data-id="${t.id}">
+      <div class="list-item leaf" data-id="${t.id}">
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
         <span class="due">${fmtDue(t.due)}</span>
