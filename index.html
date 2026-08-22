@@ -140,6 +140,10 @@
   .chip.work { background: var(--work); }
   .chip.personal { background: var(--personal); }
 
+  .priority-badge { display: inline-flex; align-items: center; gap: 3px; font-size: var(--fs-micro); font-weight: 600; color: var(--muted); }
+  .priority-badge.priority-medium { font-weight: 700; }
+  .priority-badge.priority-high { color: var(--ink); font-weight: 700; }
+
   .view { display: none; }
   .view.active { display: block; }
 
@@ -166,8 +170,12 @@
   #kanbanCols::-webkit-scrollbar { height: 10px; }
   #kanbanCols::-webkit-scrollbar-track { background: var(--surface-alt); }
   #kanbanCols::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 0; }
-  .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 10px; min-height: 200px; }
-  .kanban-col h2 { font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .kanban-col { background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius); padding: 10px; min-height: 200px; max-height: 65vh; display: flex; flex-direction: column; }
+  .kanban-col h2 { flex: none; font-size: var(--fs-micro); margin: 2px 4px 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .kanban-col-cards { overflow-y: auto; flex: 1 1 auto; margin: 0 -10px; padding: 0 10px; }
+  .kanban-col-cards::-webkit-scrollbar { width: 8px; }
+  .kanban-col-cards::-webkit-scrollbar-track { background: var(--surface-alt); }
+  .kanban-col-cards::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 0; }
   .kanban-col.status-done { border-top: 4px solid var(--success); }
   .kanban-col.status-done h2 { color: var(--success); }
   .task-card { background: var(--surface-alt); border: 2px solid var(--ink); border-radius: var(--radius); padding: 9px; margin-bottom: 9px; cursor: pointer; }
@@ -312,6 +320,8 @@ const WORK_CAL_NAME = 'งาน (Life Dashboard)';
 const PERSONAL_CAL_NAME = 'ส่วนตัว (Life Dashboard)';
 const STATUSES = ['backlog', 'todo', 'doing', 'done'];
 const STATUS_LABEL = { backlog: 'Backlog', todo: 'Todo', doing: 'Doing', done: 'Done' };
+const PRIORITY_LABEL = { low: 'ต่ำ', medium: 'กลาง', high: 'สูง' };
+const PRIORITY_ICON = '<svg class="icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v18"/><path d="M5 4h11l-3 4 3 4H5"/></svg>';
 const THAI_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 const DAY_LABELS = ['อา','จ','อ','พ','พฤ','ศ','ส'];
 
@@ -668,6 +678,11 @@ function fmtDue(due) {
   return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+function priorityBadge(t) {
+  if (!PRIORITY_LABEL[t.priority]) return '';
+  return `<span class="priority-badge priority-${t.priority}">${PRIORITY_ICON}${PRIORITY_LABEL[t.priority]}</span>`;
+}
+
 function render() {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === activeTab));
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === activeFilter));
@@ -711,6 +726,7 @@ function renderList() {
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
         <span class="due">${fmtDue(t.due)}</span>
+        ${priorityBadge(t)}
         <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
       </div>`).join('');
     return `<div class="list-section ${extraClass}"><h2>${label} (${items.length})</h2>${rows}</div>`;
@@ -732,7 +748,7 @@ function renderKanban() {
     const cards = items.map(t => `
       <div class="task-card" data-id="${t.id}">
         <div class="title">${escapeHtml(t.title)}</div>
-        <div class="meta"><span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span> ${fmtDue(t.due)}</div>
+        <div class="meta"><span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span> ${fmtDue(t.due)} ${priorityBadge(t)}</div>
         <div class="row">
           <select data-id="${t.id}" class="status-select">
             ${STATUSES.map(s => `<option value="${s}" ${s === status ? 'selected' : ''}>${STATUS_LABEL[s]}</option>`).join('')}
@@ -740,7 +756,7 @@ function renderKanban() {
           <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
         </div>
       </div>`).join('');
-    return `<div class="kanban-col status-${status}"><h2>${STATUS_LABEL[status]} (${items.length})</h2>${cards}</div>`;
+    return `<div class="kanban-col status-${status}"><h2>${STATUS_LABEL[status]} (${items.length})</h2><div class="kanban-col-cards">${cards}</div></div>`;
   }).join('');
 
   el.querySelectorAll('.status-select').forEach(sel => sel.addEventListener('change', (e) => {
@@ -800,6 +816,7 @@ function showDayDetail(iso, items) {
         <span class="chip ${t.project}">${t.project === 'work' ? 'งาน' : 'ส่วนตัว'}</span>
         <span class="title ${t.status === 'done' ? 'done' : ''}">${escapeHtml(t.title)}</span>
         <span class="due">${fmtDue(t.due)}</span>
+        ${priorityBadge(t)}
         <button class="icon danger-outline" data-id="${t.id}" data-action="delete">ลบ</button>
       </div>`).join('');
     el.innerHTML = `<h2>${label}</h2>${rows}`;
