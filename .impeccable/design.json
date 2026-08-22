@@ -1,121 +1,109 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-23T00:00:00.000Z",
+  "generatedAt": "2026-08-23T01:00:00.000Z",
   "title": "Design System: Life Dashboard",
   "extensions": {
     "colorMeta": {
-      "stamp-orange": {
+      "amber-tube": {
         "role": "primary",
-        "displayName": "Stamp Orange",
-        "canonical": "#c9722a",
-        "tonalRamp": ["#2c1608", "#4e270f", "#763a17", "#9e4d1f", "#c9722a", "#e0965a", "#eebd93", "#f8dfca"]
+        "displayName": "Amber Tube",
+        "canonical": "#ffcc33",
+        "tonalRamp": ["#2c2308", "#4f3f0f", "#785e17", "#a17e1f", "#cc9f26", "#e0bb52", "#eed389", "#f8ecc4"]
       },
-      "vermillion-ink": {
+      "cyan-tube": {
         "role": "secondary",
-        "displayName": "Vermillion Ink",
-        "canonical": "#a3311a",
-        "tonalRamp": ["#280c05", "#4c170a", "#752210", "#9e2d16", "#c4471f", "#dd7245", "#eba587", "#f7d2c4"]
+        "displayName": "Cyan Tube",
+        "canonical": "#2dd4f0",
+        "tonalRamp": ["#082a30", "#0f4d58", "#187380", "#219aab", "#3fbdd0", "#72d3e2", "#a8e6ef", "#dbf6fa"]
       },
-      "indigo-ink": {
+      "magenta-tube": {
         "role": "secondary",
-        "displayName": "Indigo Ink",
-        "canonical": "#1f4d5c",
-        "tonalRamp": ["#0a1a1f", "#13303a", "#1e4a58", "#296575", "#3f818f", "#6ba3ac", "#9fc4c8", "#d1e3e4"]
+        "displayName": "Magenta Tube",
+        "canonical": "#f43f8e",
+        "tonalRamp": ["#33081b", "#5c0f30", "#8c1849", "#bc2262", "#e3357e", "#ee6ea6", "#f5a4c6", "#fbd6e5"]
       },
-      "gold-seal": {
+      "green-tube": {
         "role": "tertiary",
-        "displayName": "Gold Seal",
-        "canonical": "#7d5518",
-        "tonalRamp": ["#1c1206", "#33210a", "#4d3110", "#674216", "#82541d", "#a06c2d", "#c58f4c", "#e2bc80"]
+        "displayName": "Green Tube",
+        "canonical": "#39e67a",
+        "tonalRamp": ["#0a2213", "#123f22", "#1c5e33", "#268045", "#33a75c", "#5cd382", "#96e5ae", "#cdf3da"]
       },
-      "gold-rule": {
+      "crimson-tube": {
         "role": "tertiary",
-        "displayName": "Gold Rule",
-        "canonical": "#c99a3d",
-        "tonalRamp": ["#2c2109", "#4f3c11", "#785a1a", "#a17c25", "#c99a3d", "#dab767", "#e9d295", "#f5e9c8"]
+        "displayName": "Crimson Tube",
+        "canonical": "#ff4d5e",
+        "tonalRamp": ["#330a0e", "#5c131a", "#8c1e28", "#bc2937", "#e33847", "#ee6f79", "#f5a4ab", "#fbd6d9"]
       },
-      "crimson-stamp": {
-        "role": "tertiary",
-        "displayName": "Crimson Stamp",
-        "canonical": "#7a1220",
-        "tonalRamp": ["#1c0509", "#340a10", "#521018", "#711621", "#941f2c", "#bd3a48", "#dd7480", "#f0bcc2"]
-      },
-      "board-cream": {
+      "night-ground": {
         "role": "neutral",
-        "displayName": "Board Cream",
-        "canonical": "#f3e6c8",
-        "tonalRamp": ["#2b2011", "#4f3d1f", "#7a5f2f", "#a68844", "#c7ac68", "#dcc794", "#ecdfbc", "#f8f1de"]
+        "displayName": "Night Ground",
+        "canonical": "#0b0d16",
+        "tonalRamp": ["#05060a", "#0b0d16", "#14172a", "#1e2340", "#2b3157", "#404870", "#5c6489", "#8890a8"]
       },
-      "leaf-paper": {
+      "sign-panel": {
         "role": "neutral",
-        "displayName": "Leaf Paper",
-        "canonical": "#fbf3e1",
-        "tonalRamp": ["#2f2a1c", "#564d33", "#82764c", "#ab9c6c", "#c9bc93", "#e0d6b9", "#f0e9d5", "#fbf6ec"]
+        "displayName": "Sign Panel",
+        "canonical": "#141726",
+        "tonalRamp": ["#08090f", "#141726", "#1c2036", "#2a2f45", "#3a4058", "#4f5670", "#6b7188", "#9a9fb0"]
       },
-      "leaf-shade": {
+      "unlit-gray": {
         "role": "neutral",
-        "displayName": "Leaf Shade",
-        "canonical": "#eeddb4",
-        "tonalRamp": ["#2c2312", "#4f3f21", "#7a6234", "#a3854c", "#c4a86e", "#dbc496", "#ecdcbc", "#f7ecda"]
+        "displayName": "Unlit Gray",
+        "canonical": "#8b92ac",
+        "tonalRamp": ["#15161c", "#292b35", "#3f4250", "#565a6c", "#6e7288", "#8b92ac", "#b3b8c8", "#dcdee6"]
       },
-      "press-ink": {
+      "neon-white": {
         "role": "neutral",
-        "displayName": "Press Ink",
-        "canonical": "#2a1c10",
-        "tonalRamp": ["#120b05", "#241609", "#3a230f", "#54341a", "#725029", "#94733f", "#ba9c62", "#dcc999"]
-      },
-      "ledger-brown": {
-        "role": "neutral",
-        "displayName": "Ledger Brown",
-        "canonical": "#6b5c46",
-        "tonalRamp": ["#16120d", "#2c251b", "#443a29", "#5f5237", "#7a6a47", "#988761", "#b7a887", "#dad2bd"]
+        "displayName": "Neon White",
+        "canonical": "#eef1fb",
+        "tonalRamp": ["#1c1e28", "#363948", "#54586b", "#75798e", "#9a9db0", "#c0c3d0", "#dcdee8", "#f5f6fb"]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The wordmark only, in Chonburi."
+        "purpose": "The wordmark only, in Kanit, set in Magenta Tube."
       },
       "heading": {
         "displayName": "Heading",
-        "purpose": "The add/edit form title and the calendar month/year label, in Chonburi."
+        "purpose": "The add/edit form title and the calendar month/year label, in Kanit."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Task titles, form fields, buttons, empty-state copy, in Sarabun."
+        "purpose": "Task titles, form fields, buttons, empty-state copy, in Mitr."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Chips, meta text, section headers, calendar-cell contents, priority badges, in Sarabun."
+        "purpose": "Chips, meta text, section headers, calendar-cell contents, priority badges, in Mitr."
       }
     },
     "shadows": [
       {
         "name": "shadow-sm",
-        "value": "0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10)",
-        "purpose": "Every leaf (list item, task card, kanban column, form, day-detail panel) — a soft paper lift off the board. Dark mode swaps to rgba(0,0,0,.45)/rgba(0,0,0,.35)."
+        "value": "0 2px 10px rgba(0,0,0,.4)",
+        "purpose": "Every panel (list item, task card, kanban column, form, day-detail panel) — a small neutral lift off the night ground. Never colored."
       },
       {
         "name": "shadow-btn",
-        "value": "0 2px 3px rgba(20,12,4,.22)",
-        "purpose": "Buttons at rest; cleared entirely on :active so a press reads as an ink stamp striking flat. Dark mode swaps to rgba(0,0,0,.5)."
+        "value": "0 2px 6px rgba(0,0,0,.35)",
+        "purpose": "Buttons at rest; cleared entirely on :active. Never colored — see The No-Glow Rule."
       }
     ],
     "motion": [
       {
         "name": "press",
-        "value": "transform .08s ease, box-shadow .08s ease, filter .08s ease",
-        "purpose": "Button press: scale(.97) + shadow cleared + brightness dip on :active — an ink-stamp impression."
+        "value": "transform .08s ease, box-shadow .08s ease, filter .08s ease, border-color .08s ease",
+        "purpose": "Button press: scale(.97) + shadow cleared + brightness dip on :active."
       },
       {
         "name": "tint",
-        "value": "background .1s ease",
-        "purpose": "Hover tint shift on leaves, calendar cells, and buttons."
+        "value": "background .1s ease, border-color .1s ease",
+        "purpose": "Hover tint and border-brighten shift on cards, calendar cells, and buttons."
       },
       {
-        "name": "tearAway",
-        "value": "translateY(26px) rotate(-8deg) scale(.96), opacity 0, .32s ease-in",
-        "purpose": "The one signature motion: a leaf visibly tears free of the pad when its task is marked done or deleted. Never used for any other transition."
+        "name": "powerOff",
+        "value": "opacity oscillation (1, .25, 1, .15, .8, .1, 0) + scale(.97), .4s ease-in",
+        "purpose": "The one signature motion: a task's sign flickers and powers off when marked done or deleted. Never used for any other transition."
       }
     ],
     "breakpoints": []
@@ -127,7 +115,7 @@
       "refersTo": "button-primary",
       "description": "The one action button on a screen: sign in, add task, save.",
       "html": "<button class=\"ds-btn ds-btn-primary\">+ เพิ่มงาน</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); color: var(--ink, #2a1c10); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); } .ds-btn-primary { background: var(--primary, #c9722a); color: var(--on-primary, #2a1c10); border-color: var(--primary-edge, #9c5720); } .ds-btn-primary:hover { filter: brightness(1.06); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Mitr, sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid var(--border, #2a2f45); background: var(--surface, #141726); color: var(--ink, #eef1fb); border-radius: 10px; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.35); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); } .ds-btn-primary { background: var(--primary, #ffcc33); color: var(--on-primary, #0b0d16); border-color: var(--primary-edge, #cc9f1f); } .ds-btn-primary:hover { filter: brightness(1.06); }"
     },
     {
       "name": "Default Button",
@@ -135,23 +123,23 @@
       "refersTo": "button-default",
       "description": "Secondary actions: cancel, sign out, pagination.",
       "html": "<button class=\"ds-btn ds-btn-default\">ยกเลิก</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); color: var(--ink, #2a1c10); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn:hover { background: var(--surface-alt, #eeddb4); } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Mitr, sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid var(--border, #2a2f45); background: var(--surface, #141726); color: var(--ink, #eef1fb); border-radius: 10px; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.35); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease, border-color .08s ease; } .ds-btn:hover { background: var(--surface-alt, #1c2036); border-color: var(--muted, #8b92ac); } .ds-btn:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
     },
     {
       "name": "Danger Outline Button",
       "kind": "button",
       "refersTo": "button-danger-outline",
-      "description": "Delete actions only, in a two-click confirm sequence (label changes to \"ยืนยัน?\" on first click; confirming state fills with the theme-constant --danger-fill).",
+      "description": "Delete actions only, in a two-click confirm sequence (label changes to \"ยืนยัน?\" on first click; confirming state fills solid with Crimson Tube).",
       "html": "<button class=\"ds-btn ds-btn-danger\">ลบ</button>",
-      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; border: 2px solid var(--ink, #2a1c10); background: var(--surface, #fbf3e1); border-radius: 0; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 3px rgba(20,12,4,.22); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn-danger { color: var(--danger, #7a1220); border-color: var(--danger, #7a1220); } .ds-btn-danger:hover { background: var(--surface-alt, #eeddb4); } .ds-btn-danger.confirming { background: var(--danger-fill, #7a1220); border-color: var(--danger-fill, #7a1220); color: #fff; } .ds-btn-danger:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
+      "css": ".ds-btn { position: relative; display: inline-flex; align-items: center; gap: 7px; font-family: Mitr, sans-serif; font-weight: 600; font-size: 14px; border: 1.5px solid var(--border, #2a2f45); background: var(--surface, #141726); border-radius: 10px; padding: 8px 13px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.35); transition: transform .08s ease, box-shadow .08s ease, filter .08s ease; } .ds-btn-danger { color: var(--danger, #ff4d5e); border-color: var(--danger, #ff4d5e); } .ds-btn-danger:hover { background: rgba(255,77,94,.08); } .ds-btn-danger.confirming { background: var(--danger-fill, #ff4d5e); border-color: var(--danger-fill, #ff4d5e); color: var(--on-accent, #0b0d16); } .ds-btn-danger:active { transform: scale(.97); box-shadow: none; filter: brightness(.94); }"
     },
     {
       "name": "Work Chip",
       "kind": "chip",
       "refersTo": "chip-work",
-      "description": "Marks a task or event as \"งาน\" (Work). Appears in list rows, kanban cards, and calendar chips.",
+      "description": "Marks a task or event as \"งาน\" (Work). Colored text on a faintly tinted transparent ground, never a solid fill.",
       "html": "<span class=\"ds-chip ds-chip-work\">งาน</span>",
-      "css": ".ds-chip { display: inline-block; font-family: Sarabun, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 3px; color: #fff; } .ds-chip-work { background: var(--work, #a3311a); }"
+      "css": ".ds-chip { display: inline-block; font-family: Mitr, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; } .ds-chip-work { color: var(--work, #2dd4f0); border: 1.5px solid var(--work, #2dd4f0); background: rgba(45,212,240,.08); }"
     },
     {
       "name": "Personal Chip",
@@ -159,7 +147,7 @@
       "refersTo": "chip-personal",
       "description": "Marks a task or event as \"ส่วนตัว\" (Personal).",
       "html": "<span class=\"ds-chip ds-chip-personal\">ส่วนตัว</span>",
-      "css": ".ds-chip { display: inline-block; font-family: Sarabun, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 3px; color: #fff; } .ds-chip-personal { background: var(--personal, #1f4d5c); }"
+      "css": ".ds-chip { display: inline-block; font-family: Mitr, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; } .ds-chip-personal { color: var(--personal, #f43f8e); border: 1.5px solid var(--personal, #f43f8e); background: rgba(244,63,142,.08); }"
     },
     {
       "name": "Text Input",
@@ -167,15 +155,15 @@
       "refersTo": null,
       "description": "Task title, notes, and every other free-text field in the add-task form.",
       "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"ชื่องาน\">",
-      "css": ".ds-input { font-family: Sarabun, sans-serif; font-size: 14px; padding: 8px 10px; border-radius: 0; border: 2px solid var(--ink, #2a1c10); background: var(--bg, #f3e6c8); color: var(--text, #2a1c10); } .ds-input:focus-visible { outline: 3px solid var(--primary, #c9722a); outline-offset: 2px; }"
+      "css": ".ds-input { font-family: Mitr, sans-serif; font-size: 14px; padding: 8px 10px; border-radius: 6px; border: 1.5px solid var(--border, #2a2f45); background: var(--bg, #0b0d16); color: var(--text, #eef1fb); } .ds-input:focus-visible { outline: 3px solid var(--primary, #ffcc33); outline-offset: 2px; }"
     },
     {
-      "name": "Leaf (signature card)",
+      "name": "Sign Panel (signature card)",
       "kind": "card",
       "refersTo": null,
-      "description": "The shared material for every list row, task card, and panel: a perforated paper leaf on the board, with a soft shadow and a die-cut hole strip along its top edge. Plays the tearAway keyframe on delete or completion.",
-      "html": "<div class=\"ds-leaf\"><span class=\"ds-leaf-title\">ส่งรายงานประจำเดือน</span></div>",
-      "css": ".ds-leaf { position: relative; background: var(--surface, #fbf3e1); border: 2px solid var(--ink, #2a1c10); border-radius: 0; box-shadow: 0 2px 6px rgba(20,12,4,.14), 0 1px 2px rgba(20,12,4,.10); padding: 9px 12px; } .ds-leaf::before { content: \"\"; position: absolute; left: 10px; right: 10px; top: -1px; height: 4px; background-image: radial-gradient(circle, var(--bg, #f3e6c8) 1.6px, transparent 1.7px); background-size: 9px 4px; background-repeat: repeat-x; background-position: top left; } .ds-leaf-title { font-family: Sarabun, sans-serif; font-size: 14px; font-weight: 500; color: var(--text, #2a1c10); } .ds-leaf.tearing { animation: dsTearAway .32s ease-in forwards; pointer-events: none; } @keyframes dsTearAway { 0% { transform: translateY(0) rotate(0); opacity: 1; } 30% { transform: translateY(-3px) rotate(-1deg); } 100% { transform: translateY(26px) rotate(-8deg) scale(.96); opacity: 0; } }"
+      "description": "The shared material for every list row, task card, and panel: a dark, 10px-rounded panel with a neutral 1.5px frame and a small uncolored shadow. Plays the powerOff keyframe on delete or completion.",
+      "html": "<div class=\"ds-panel\"><span class=\"ds-panel-title\">ส่งรายงานประจำเดือน</span></div>",
+      "css": ".ds-panel { position: relative; background: var(--surface, #141726); border: 1.5px solid var(--border, #2a2f45); border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.4); padding: 9px 12px; } .ds-panel-title { font-family: Mitr, sans-serif; font-size: 14px; font-weight: 500; color: var(--text, #eef1fb); } .ds-panel.tearing { animation: dsPowerOff .4s ease-in forwards; pointer-events: none; } @keyframes dsPowerOff { 0% { opacity: 1; } 12% { opacity: .25; } 24% { opacity: 1; } 38% { opacity: .15; } 55% { opacity: .8; } 72% { opacity: .1; } 100% { opacity: 0; transform: scale(.97); } }"
     },
     {
       "name": "View Tab (Navigation)",
@@ -183,59 +171,54 @@
       "refersTo": null,
       "description": "One of three view toggles (List / Kanban / Calendar) living inside a bordered pill container; pairs a line icon with Thai text.",
       "html": "<button class=\"ds-tab ds-tab-active\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"4\" cy=\"6\" r=\"1\"/><line x1=\"8\" y1=\"6\" x2=\"20\" y2=\"6\"/><circle cx=\"4\" cy=\"12\" r=\"1\"/><line x1=\"8\" y1=\"12\" x2=\"20\" y2=\"12\"/><circle cx=\"4\" cy=\"18\" r=\"1\"/><line x1=\"8\" y1=\"18\" x2=\"20\" y2=\"18\"/></svg> รายการ</button>",
-      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; font-family: Sarabun, sans-serif; font-weight: 600; font-size: 14px; padding: 6px 13px; border-radius: 0; color: var(--ink, #2a1c10); cursor: pointer; } .ds-tab:hover { background: var(--surface-alt, #eeddb4); } .ds-tab-active { background: var(--primary, #c9722a); color: var(--on-primary, #2a1c10); }"
+      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 6px; border: none; background: transparent; font-family: Mitr, sans-serif; font-weight: 600; font-size: 14px; padding: 6px 13px; border-radius: 6px; color: var(--ink, #eef1fb); cursor: pointer; } .ds-tab:hover { background: var(--surface-alt, #1c2036); } .ds-tab-active { background: var(--primary, #ffcc33); color: var(--on-primary, #0b0d16); }"
     }
   ],
   "narrative": {
-    "northStar": "The Shop Calendar",
-    "overview": "Life Dashboard replaced its earlier \"Sticker Notebook\" identity (flat pastel stickers, no shadows, pedestal-press buttons) with a different everyday object entirely: the printing-house wall calendar that hangs in homes and shopfronts across Thailand — a bold masthead above a tear-off date pad, a thin gold rule separating the two, printed in whatever two house inks the press had on hand. This is a solo daily-use tool, not a marketing surface, so the calendar-shop reference stays functional throughout: every task is a leaf on the pad, and finishing or deleting one visibly tears it free rather than just fading away.\n\nThe palette is two deep house inks (a vermillion for \"งาน\", an indigo for \"ส่วนตัว\") printed on warm cream paper, with a burnt-orange stamp ink reserved for the one action color and an antique-gold rule marking every heading. Chonburi carries the masthead and section-scale headings only; Sarabun carries everything read densely, so density and legibility win over expression exactly where the daily task list needs to be scanned fast.",
+    "northStar": "Neon Signage",
+    "overview": "Life Dashboard's second full redesign replaced \"The Shop Calendar\" (a printing-house tear-off pad) with an entirely different material: a strip of shop-front neon tube signage seen at night. This is a solo daily-use tool, not a marketing surface, so the reference stays functional -- every task is a sign, lit or unlit, and finishing or deleting one plays a brief power-off flicker before it's gone.\n\nThe palette is a near-black night ground carrying two neon tube colors with one job each -- electric cyan for \"งาน\", hot magenta for \"ส่วนตัว\" -- plus an amber \"OPEN sign\" color for the one primary action and a green tube for done/success. An early build pass leaned on blurred colored glow to sell the neon read; the mechanical detector flagged every instance as the generic \"AI-generated dark UI\" cliche, and every glow was cut rather than merely dimmed. The shipped system carries its signage identity entirely through saturated color, 1.5px outline, and shape, with zero blur anywhere.",
     "keyCharacteristics": [
-      "A warm cream board under paper-white leaves — every task card, list row, and panel is a leaf on the pad, with a die-cut perforation strip and a soft paper shadow (never a hard, zero-blur block shadow).",
-      "Two house inks with one job each — vermillion for งาน, indigo for ส่วนตัว — plus a burnt-orange stamp ink for the one action color and a gold rule under every heading.",
-      "Chonburi (vintage Thai shop-sign lettering) at display/heading scale only; Sarabun for every densely-read surface.",
-      "One signature motion: a leaf tears free the moment a task is marked done or deleted. No other scattered hover/entrance effects.",
-      "Sharp-cut corners everywhere except the 3px chip label.",
-      "Today's date on the calendar wears a printed ring, not a filled highlight."
+      "A near-black night ground under dark panel cards -- no paper, no cream; committed to a single always-dark theme with no light-mode variant.",
+      "Two neon tube colors with one job each -- cyan for งาน, magenta for ส่วนตัว -- plus amber for the one primary action and green for done/success.",
+      "Zero blur-based glow anywhere -- identity is carried by saturated color, 1.5px outline, and shape alone, a deliberate correction after the detector caught the initial pass's colored halos as a known slop pattern.",
+      "Chips are colored text on a faintly tinted transparent ground, never a solid color fill with white text.",
+      "Moderate rounded corners (10px panels, fully pill-shaped chips) -- a bent neon tube, not a cut-paper edge.",
+      "One signature motion: a task's sign flickers and powers off the moment it's marked done or deleted."
     ],
     "rules": [
       {
         "name": "The One Job Per Color Rule",
-        "body": "Every accent has exactly one meaning app-wide (vermillion = work, indigo = personal, gold seal = done/important, stamp orange = the primary action, crimson = danger). Gold Rule is the sole exception, by design: it is decoration, not signal.",
+        "body": "Every neon color has exactly one meaning app-wide (cyan = work, magenta = personal, green = done/important, amber = the primary action, crimson = danger). The wordmark's magenta is the sole decorative exception.",
         "section": "colors"
       },
       {
         "name": "The 4.5:1 Floor",
-        "body": "Any color paired with text clears at least 4.5:1 against its actual background, checked in both themes. --on-primary and --danger-fill exist specifically because a single theme-swapped token could not satisfy this for every role a color plays.",
+        "body": "Any color paired with text clears at least 4.5:1 against its actual background. --on-primary exists because white text fails against Amber Tube.",
         "section": "colors"
       },
       {
-        "name": "The Warm-Dark Rule",
-        "body": "Dark mode stays in the same warm brown-black family as the light board; it never drifts to a cool blue-black generic-dark-mode ground.",
-        "section": "colors"
+        "name": "The No-Glow Rule",
+        "body": "No text-shadow or colored box-shadow blur appears anywhere. An early pass used both and the detector flagged it as slop; every instance was cut, not thinned. Depth and identity come from saturated color, a 1.5px outline, and shape only.",
+        "section": "elevation"
       },
       {
         "name": "The Masthead-Only Rule",
-        "body": "Chonburi appears only at Display or Heading scale (>=18px). It never appears on densely-repeated content, which this Operate-mode tool cannot afford to make less legible.",
+        "body": "Kanit appears only at Display or Heading scale (>=18px); it never appears on densely-repeated content.",
         "section": "typography"
-      },
-      {
-        "name": "The Paper-Shadow Rule",
-        "body": "Shadows are always soft and offset (never a flat, zero-blur block shadow) and always attached to a leaf or a button.",
-        "section": "elevation"
       }
     ],
     "dos": [
-      "Do keep every leaf's border 2px solid Press Ink at 0 radius, with a soft shadow-sm.",
-      "Do reserve Gold Seal for completion/importance only; keep Gold Rule purely decorative.",
-      "Do keep Chonburi at Display/Heading scale only (>=18px).",
-      "Do keep dark mode in the warm brown-black family; never drift to a cool blue-black ground.",
-      "Do play the tearAway motion on done/delete and nowhere else."
+      "Do keep every panel's border 1.5px solid Frame Dim (or the matching semantic color) at 10px radius, with a small neutral shadow.",
+      "Do reserve Green Tube for completion/importance only.",
+      "Do keep Kanit at Display/Heading scale only (>=18px).",
+      "Do play the powerOff flicker on done/delete and nowhere else.",
+      "Do render chips as colored text on a faint tint, never a solid fill."
     ],
     "donts": [
-      "Don't use a hard-offset, zero-blur shadow anywhere.",
-      "Don't put white text on Stamp Orange (or any primary-fill surface) — use --on-primary.",
-      "Don't let Vermillion, Indigo, Gold Seal, Crimson, or Stamp Orange mean anything other than their one assigned role.",
-      "Don't round a corner beyond the 3px chip exception.",
+      "Don't add a text-shadow or colored box-shadow blur anywhere -- it was tried, flagged as slop, and removed for good.",
+      "Don't put white text on Amber Tube -- use --on-primary.",
+      "Don't let Cyan, Magenta, Green, Crimson, or Amber mean anything other than their one assigned role.",
+      "Don't ship a light-mode variant -- this world is committed to always-dark.",
       "Don't use an emoji or Unicode glyph as a stand-in icon."
     ]
   }
